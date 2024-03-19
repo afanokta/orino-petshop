@@ -14,40 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-    <style>
-        section {
-        padding-top: 64px;
-        position: relative;
-    }
-
-    section::before {
-        z-index: -1;
-        content: '';
-        font-size: 64px;
-        color: grey;
-        opacity: 0.25;
-        position: absolute;
-        font-weight: 600;
-        top: 20px;
-        left: -10px;
-    }
-
-    .navbar .nav-link:hover {
-        font-weight: bold;
-    }
-
-    .navbar {
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
-    }
-
-        .navbar-nav .nav-item .nav-link.btn:hover,
-        .navbar-nav .nav-item .nav-link.btn:active,
-        .navbar-nav .nav-item .nav-link.btn:focus {
-            background-color: #FFCC00 !important;
-        }
-    </style>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
 </head>
     <body style="background-color: #fdf9e5">
         <div id="app">
@@ -58,7 +25,7 @@
                         style="width: 45px; height: auto;">
                         Orino Petshop and Vet Clinic
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>

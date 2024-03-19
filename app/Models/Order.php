@@ -13,6 +13,7 @@ class Order extends Model
         'user_id',
         'is_paid',
         'payment_receipt',
+        'price',
     ];
 
     public function user()
@@ -23,5 +24,10 @@ class Order extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function service()
+    {
+        return $this->morphTo();
     }
 }
