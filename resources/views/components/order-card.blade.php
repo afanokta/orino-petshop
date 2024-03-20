@@ -9,28 +9,66 @@
                 </div>
             @endif
             @foreach ($orders as $order)
-                <div class="card mb-2">
+                <div class="card my-4">
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
                                 <h5 class="card-title">Order ID {{ $order->id }}</h5>
-                                <h6 class="card-subtittle mb-2 text-muted"> By {{ $order->user->name }}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted"> By {{ $order->user->name }}</h6>
                             </div>
-                            <div class="col">
-                                {{-- {{ $order->is_paid }} --}}
-                                @if ($order->is_paid == true)
-                                    <p class="card-text badge bg-success p-2 align-">Paid</p>
-                                @else
-                                    <p class="card-text badge bg-danger p-2">Unpaid</p>
-                                @endif
+                            <div class="col d-flex justify-content-end align-items-start gap-2">
+                                @switch($order->confirmation)
+                                    @case('waiting')
+                                        <span class="badge bg-warning p-2">Menunggu Konfirmasi</span>
+                                    @break
+
+                                    @case('confirm')
+                                        @if ($order->is_paid == true)
+                                            <span class="card-text badge bg-success p-2">Paid</span>
+                                        @else
+                                            <span class="card-text badge bg-danger p-2">Unpaid</span>
+                                        @endif
+                                        <span class="badge bg-success p-2">Diterima</span>
+                                    @break
+
+                                    @default
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#alasan{{ $order->id }}">Ditolak</button>
+                                        <div class="modal fade" id="alasan{{ $order->id }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content" style="background: #fdf9e5;">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Mohon Maaf Pemesanan
+                                                            Anda Telah Ditolak
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h5>Pesanan Anda ditolak karena <span
+                                                                class="text-danger">{{ $order->reject_message }}</span>,
+                                                            Silahkan
+                                                            Lakukan Pemesanan Ulang</h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                @endswitch
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around">
+                        <div class="d-flex justify-content-around my-2">
                             @if ($order->payment_receipt)
                                 <button type="button" class="btn btn-primary text-white fw-bold" data-bs-toggle="modal"
                                     data-bs-target="#buktiBayar{{ $order->id }}">Lihat Bukti Bayar</button>
                             @else
-                                <button type="button" class="btn btn-warning text-white fw-bold" data-bs-toggle="modal"
+                                <button type="button"
+                                    class="btn btn-warning text-white fw-bold {{ $order->confirmation == 'reject' || $order->confirmation == 'waiting' ? 'disabled' : '' }}"
+                                    data-bs-toggle="modal"
                                     data-bs-target="#uploadPayment{{ $order->id }}">Bayar</button>
                             @endif
                             <button type="button" class="btn btn-success text-white fw-bold" data-bs-toggle="modal"
@@ -52,6 +90,11 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    <div class="container text-center my-2">
+                                        Status pemesanan akan tetap "Unpaid" hingga
+                                        staff
+                                        Admin kami mengonfirmasi bukti pembayaran Anda
+                                    </div>
                                     <img class="img-fluid" src="{{ asset('storage/' . $order->payment_receipt) }}"
                                         alt="">
                                 </div>
@@ -121,12 +164,6 @@
                     </div>
                 </div>
             @endforeach
-            {{-- @if ($order->service_type == 'App\Models\Grooming')
-                {{ Paginator::setPageName('grooming') }}
-            @else
-                {{ Paginator::setPageName('pethotel') }}
-            @endif --}}
-            {{-- {{ $orders->links('pagination::bootstrap-5') }} --}}
         </div>
     </div>
 </div>

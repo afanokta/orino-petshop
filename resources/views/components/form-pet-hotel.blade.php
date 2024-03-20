@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label>Usia</label>
-                            <input type="text" name="pet_age" placeholder="Usia Kucing" class="form-control"
+                            <input type="number" name="pet_age" placeholder="Usia Kucing" class="form-control"
                                 required><br>
                         </div>
                         <div class="form-group">

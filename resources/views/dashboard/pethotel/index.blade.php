@@ -31,7 +31,6 @@
                             <th>#</th>
                             <th>Owner</th>
                             <th>Nama Hewan</th>
-                            <th>Nomor Telp.</th>
                             <th>Status Pembayaran</th>
                             <th>Tanggal Masuk</th>
                             <th>Tanggal Keluar</th>
@@ -49,13 +48,22 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $ph->owner }}</td>
                                 <td>{{ $ph->pet_name }}</td>
-                                <td>{{ $ph->phone_number }}</td>
                                 <td>
-                                    @if ($ph->order->is_paid == true)
-                                        <span class="text-success fw-bold">Paid</span>
-                                    @else
-                                        <span class="text-danger fw-bold">Unpaid</span>
-                                    @endif
+                                    @switch($ph->order->confirmation)
+                                        @case('confirm')
+                                            <span
+                                                class="fw-bold badge {{ $ph->order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $ph->order->is_paid ? 'Paid' : 'Unpaid' }}</span>
+                                            <span
+                                                class="fw-bold badge {{ $ph->order->payment_receipt != null ? 'bg-success' : 'bg-danger' }}">{{ $ph->order->payment_receipt == null ? 'Belum Bayar' : 'Sudah Bayar' }}</span>
+                                        @break
+
+                                        @case('waiting')
+                                            <span class="badge bg-warning">Menunggu Konfirmasi</span>
+                                        @break
+
+                                        @default
+                                            <span class="badge bg-danger">Ditolak</span>
+                                    @endswitch
                                 </td>
                                 <td>{{ $ph->start_date }}</td>
                                 <td>{{ $ph->end_date }}</td>

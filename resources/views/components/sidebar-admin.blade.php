@@ -61,9 +61,9 @@
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a class="dropdown-item" href="{{ route('show_profile') }}">Profile</a></li>
             <li>
-                <form id="logout-form" class="dropdown-item" action="{{ route('logout') }}" method="POST">
+                <form id="logout-form" class="" action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <input type="submit" class="text-decoration-none text-white" value="Logout" />
+                    <input type="submit" class="dropdown-item text-white" value="Logout" />
                 </form>
             </li>
         </ul>

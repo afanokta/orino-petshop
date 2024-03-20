@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use App\Models\Order;
-use App\Models\Product;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -14,37 +11,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
-    public function checkout()
-    {
-        $user_id = Auth::id();
-        $carts = Cart::where('user_id', $user_id)->get();
-
-        if ($carts == null) {
-            return Redirect::back();
-        }
-
-        $order = Order::create([
-            'user_id' => $user_id,
-        ]);
-
-        foreach ($carts as $cart) {
-            $product = Product::find($cart->product_id);
-            $product->update([
-                'stock' => $product->stock - $cart->amount,
-            ]);
-
-            Transaction::create([
-                'amount' => $cart->amount,
-                'order_id' => $order->id,
-                'product_id' => $cart->product_id,
-            ]);
-
-            $cart->delete();
-        }
-
-        return Redirect::route('show_order', $order);
-    }
-
     public function show(Request $request, Order $order)
     {
         return view('dashboard.order.show', compact('order'));
@@ -68,12 +34,9 @@ class OrderController extends Controller
         $pethotelOrders = $user->orders()->whereHas('service', function ($query) {
             $query->where('service_type', 'LIKE', '%PetHotel%');
         })->orderBy('created_at', 'desc')->get();
-        // $pethotelOrders->setPageName('pethotel_order');
         $groomingOrders = $user->orders()->whereHas('service', function ($query) {
             $query->where('service_type', 'LIKE', '%Grooming%');
         })->orderBy('created_at', 'desc')->get();
-        // $groomingOrders->setPageName('grooming_order');
-        // dd($groomingOrders, $pethotelOrders);
         return view('index_order', compact('groomingOrders', 'pethotelOrders'));
     }
 
@@ -91,18 +54,14 @@ class OrderController extends Controller
 
     public function submit_payment_receipt(Order $order, Request $request)
     {
-        // dd($request->all());
         try {
-            //code...
             $file = $request->file('payment_receipt');
-            // $fileName = time() . '_' . $order->id . '.' . $file->extension();
             $path = Storage::disk('public')->put('payment_receipts', $file);
             $order->update([
                 'payment_receipt' => $path,
             ]);
 
         } catch (\Throwable $th) {
-            //throw $th;
             dd($th->getMessage());
             return redirect()->back()->with('errors', 'Gagal Upload Bukti Pembayaran');
         }
@@ -133,7 +92,7 @@ class OrderController extends Controller
             $data['end_date'] = $request->end_date;
             $data['start_date'] = $request->start_date;
         }
-        $orders = $orders->orderBy('created_at', 'desc')->paginate(10);
+        $orders = $orders->orderBy('updated_at', 'desc')->paginate(10);
         $data['orders'] = $orders;
         return view('dashboard.order.index', $data);
     }
@@ -150,11 +109,23 @@ class OrderController extends Controller
         return view('order_data', compact('orders'));
     }
 
-    public function delete_order(Order $order)
+    public function acceptOrder(Order $order)
     {
-        $order->service->delete();
-        $order->delete();
+        try {
+            $order->update(['confirmation' => 'confirm']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('errors', 'Gagal Menerima Pesanan');
+        }
+        return redirect()->back()->with('success', 'Berhasil Menerima Pesanan');
+    }
 
-        return Redirect::route('list-order');
+    public function rejectOrder(Request $request, Order $order)
+    {
+        try {
+            $order->update(['confirmation' => 'reject', 'reject_message' => $request->reject_message]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('errors', 'Gagal Update Pesanan');
+        }
+        return redirect()->back()->with('success', 'Berhasil Menolak Pesanan');
     }
 }

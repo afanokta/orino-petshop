@@ -17,7 +17,6 @@ class ProductSeeder extends Seeder
             'description' => 'Shampoo Biasa Parfum Potong Kuku Pembersihan Telinga',
             'price' => 35000,
             'category_id' => 1,
-            'image' => 'path',
         ]);
 
         Product::create([
@@ -25,7 +24,6 @@ class ProductSeeder extends Seeder
             'description' => 'Shampoo Anti Kutu Parfum Potong Kuku Trimming Paw Pembersihan Telinga',
             'price' => 50000,
             'category_id' => 1,
-            'image' => 'path',
         ]);
 
         Product::create([
@@ -33,23 +31,20 @@ class ProductSeeder extends Seeder
             'description' => 'Shampoo Anti Jamur Parfum Potong Kuku Trimming Pow Pembersihan Telinga',
             'price' => 50000,
             'category_id' => 1,
-            'image' => 'path',
         ]);
 
         Product::create([
             'name' => 'Grooming Komplit',
             'description' => 'Shampoo Premium Parfum Potong Kuku Trimming Paw Pembersihan Telinga Degreaser',
-            'price' => 50000,
+            'price' => 65000,
             'category_id' => 1,
-            'image' => 'path',
         ]);
 
         Product::create([
             'name' => 'Pet Hotel',
             'description' => 'Pet Hotel yang terjamin',
-            'price' => 100000,
+            'price' => 35000,
             'category_id' => 1,
-            'image' => 'path',
         ]);
     }
 }

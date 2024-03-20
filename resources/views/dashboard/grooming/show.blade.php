@@ -4,10 +4,28 @@
             <div class="col">
                 <a href="{{ route('admin.order.show', ['order' => $grooming->order->id]) }}" class="btn btn-primary">Lihat
                     Order</a>
+                <a href="{{ route('admin.grooming.edit', ['grooming' => $grooming->id]) }}"
+                    class="btn btn-warning">Edit
+                    Data</a>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6 col-12">
+                <div class="form-group mb-2">
+                    @switch($grooming->order->confirmation)
+                        @case('waiting')
+                            <label>Status : <span class="badge bg-warning">Menunggu Konfirmasi</span></label>
+                        @break
+
+                        @case('confirm')
+                            <label>Status : <span class="badge bg-success">Diterima</span></label>
+                        @break
+
+                        @default
+                            <label class="mb-2">Status : <span class="badge bg-danger">Ditolak</span></label>
+                            <input type="text" class="form-control" value="{{ $grooming->order->reject_message }}" readonly>
+                    @endswitch
+                </div>
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <div class="form-group mb-2">

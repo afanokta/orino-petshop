@@ -103,7 +103,7 @@
             </div>
         </section>
 
-        <section id="pesan-ph" class="pesan-ph-container">
+        <section id="pesan-ph" class="pesan-ph-container container">
             <div style="text-align: center;">
                 <h1 class="fw-bold mb-3" id="pesanpethotel">
                     Pesan Pet Hotel

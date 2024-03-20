@@ -3,28 +3,28 @@
         <section class="container">
             <div class="row">
                 <!-- Kolom Kiri (Gambar) -->
-                <div class="col-lg-6 position-relative">
+                <div class="col-lg-6 position-relative mb-4">
                     <img src="{{ asset('media/bg2.svg') }}" alt="bg2"
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6 d-flex justify-content-center">
                             <div class="grooming-image">
                                 <img src="{{ asset('media/grooming-cat.svg') }}" alt="Grooming Image 1" class="img-fluid">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 d-flex justify-content-center">
                             <div class="grooming-image">
                                 <img src="{{ asset('media/grooming-cat-2.svg') }}" alt="Grooming Image 2" class="img-fluid">
                             </div>
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-6">
+                        <div class="col-6 d-flex justify-content-center">
                             <div class="grooming-image">
                                 <img src="{{ asset('media/grooming-cat-3.svg') }}" alt="Grooming Image 3" class="img-fluid">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 d-flex justify-content-center">
                             <div class="grooming-image">
                                 <img src="{{ asset('media/grooming-cat-4.svg') }}" alt="Grooming Image 4" class="img-fluid">
                             </div>
@@ -33,8 +33,8 @@
                 </div>
 
                 <!-- Kolom Kanan (Teks Penjelasan) -->
-                <div class="col-lg-6">
-                    <h1 class="judul fw-bold mb-3" style="margin-left: 0;">
+                <div class="col-lg-6 container mt-md-0">
+                    <h1 class="judul fw-bold mb-3">
                         Apa itu Layanan Grooming?</h1>
                     <h4 class="animate__animated animate__headShake"
                         style="margin-left: 0;
@@ -111,8 +111,8 @@
                 </div>
             </div>
         </section>
-
         <section id="jenis-grooming" class="jenis-grooming-container">
+            {{-- @if (Auth::user()) --}}
             <div style="text-align: center;">
                 <h1 class="fw-bold mb-3" id="pesangrooming">
                     Pesan Grooming
@@ -124,8 +124,12 @@
                     form di bawah ini.</h4>
             </div>
             <x-form-grooming :services="$services" />
-            </div>
             <br><br>
+            {{-- @else
+                <div class="text-center">
+                    <h3 class="fw-bold mb-3" id="pesangrooming">Silahkan Login Untuk Dapat Memesan Layanan</h3>
+                </div>
+            @endif --}}
         </section>
     @endslot
     @push('script')
@@ -180,11 +184,12 @@
                             success: function(res) {
                                 if (res.session.length == 0) {
                                     $(`.form-check label`).removeClass("disable");
+                                    $(`input[name=sesi]`).prop("disabled", false);
                                 }
                                 res.session.forEach(element => {
                                     $(`label[for="${element.session}"]`).addClass(
                                         'disable');
-                                    $(`input[value="${element.session}"]`).attr(
+                                    $(`input[value="${element.session}"]`).prop(
                                         "disabled", true);
                                 });
                             }

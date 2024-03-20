@@ -30,7 +30,6 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Nomor Tlp.</th>
                             <th>Waktu Order</th>
                             <th>Jenis Layanan</th>
                             <th>Payment Status</th>
@@ -49,14 +48,24 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $order->service->owner ?? 'tidak ada' }}</td>
                                 <td>{{ $order->user->email }}</td>
-                                <td>{{ $order->service->phone_number ?? 'tidak ada' }}</td>
-                                <td>{{ $order->created_at }}</td>
+                                <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                                 <td>{{ $order->service->product->name ?? 'tidak ada' }}</td>
                                 <td>
-                                    <span
-                                        class="fw-bold badge {{ $order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $order->is_paid ? 'Paid' : 'Unpaid' }}</span>
-                                    <span
-                                        class="fw-bold badge {{ $order->payment_receipt != null ? 'bg-success' : 'bg-danger' }}">{{ $order->payment_receipt == null ? 'Belum Bayar' : 'Sudah Bayar' }}</span>
+                                    @switch($order->confirmation)
+                                        @case('confirm')
+                                            <span
+                                                class="fw-bold badge {{ $order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $order->is_paid ? 'Paid' : 'Unpaid' }}</span>
+                                            <span
+                                                class="fw-bold badge {{ $order->payment_receipt != null ? 'bg-success' : 'bg-danger' }}">{{ $order->payment_receipt == null ? 'Belum Bayar' : 'Sudah Bayar' }}</span>
+                                        @break
+
+                                        @case('waiting')
+                                            <span class="badge bg-warning">Menunggu Konfirmasi</span>
+                                        @break
+
+                                        @default
+                                            <span class="badge bg-danger">Ditolak</span>
+                                    @endswitch
                                 </td>
                                 <td>
                                     <p>{{ $order->price }}</p>

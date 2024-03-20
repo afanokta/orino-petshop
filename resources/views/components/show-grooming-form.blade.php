@@ -47,9 +47,9 @@
                 name="date" required readonly>
         </div>
         <div class="form-group mb-3">
-            <label for="sesi-jadwal">Sesi Pemesanana</label>
-            <input readonly value="{{ $order->service->session }}" type="time" class="form-control" id="sesi-jadwal"
-                name="session" required readonly>
+            <label for="sesi-jadwal">Sesi Pemesanan</label>
+            <input readonly value="{{ $order->service->session->format('H:i') }}" type="time" class="form-control"
+                id="sesi-jadwal" name="session" required readonly>
         </div>
         <div class="form-group mb-3">
             <label>Jenis Grooming</label>

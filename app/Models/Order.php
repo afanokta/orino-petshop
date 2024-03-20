@@ -14,16 +14,13 @@ class Order extends Model
         'is_paid',
         'payment_receipt',
         'price',
+        'confirmation',
+        'reject_message'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
     }
 
     public function service()

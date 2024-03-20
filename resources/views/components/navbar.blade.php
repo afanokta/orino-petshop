@@ -23,10 +23,12 @@
                     <a class="nav-link btn btn-warning text-black {{ Route::current()->getName() == 'pethotel_page' ? 'active' : '' }}"
                         href="{{ route('pethotel_page') }}">PET HOTEL</a>
                 </li>
-                <li class="nav-item ps-3">
-                    <a class="nav-link btn btn-warning text-black {{ Route::current()->getName() == 'index_order' ? 'active' : '' }}"
-                        href="{{ route('index_order') }}">ORDER</a>
-                </li>
+                @if (Auth::user())
+                    <li class="nav-item ps-3">
+                        <a class="nav-link btn btn-warning text-black {{ Route::current()->getName() == 'index_order' ? 'active' : '' }}"
+                            href="{{ route('index_order') }}">ORDER</a>
+                    </li>
+                @endif
                 <li class="nav-item ps-3">
                     <a class="nav-link btn btn-warning text-black"
                         href="{{ route('landing_page') . '#feedback' }}">FEEDBACK</a>

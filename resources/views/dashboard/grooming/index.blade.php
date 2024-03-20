@@ -7,7 +7,7 @@
             <form action="{{ route('admin.grooming.index') }}" method="get">
                 <div class="row pb-3">
                     <div class="col-lg-3 col-12 pt-4">
-                        <a href="{{ route('pethotel_page') }}" class="btn btn-success">Tambah Data Pet Hotel</a>
+                        <a href="{{ route('grooming_page') }}" class="btn btn-success">Tambah Data Grooming</a>
                     </div>
                     <div class="col-lg-3 col-12">
                         <label>Start Date:</label>
@@ -31,7 +31,6 @@
                             <th>#</th>
                             <th>Owner</th>
                             <th>Nama Hewan</th>
-                            <th>Nomor Telp.</th>
                             <th>Layanan</th>
                             <th>Status Pembayaran</th>
                             <th>Tanggal Grooming</th>
@@ -50,11 +49,23 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $grooming->owner }}</td>
                                 <td>{{ $grooming->pet_name }}</td>
-                                <td>{{ $grooming->phone_number }}</td>
                                 <td>{{ $grooming->product->name }}</td>
                                 <td>
-                                    <span
-                                        class="fw-bold badge {{ $grooming->order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $grooming->order->is_paid ? 'Paid' : 'Unpaid' }}</span>
+                                    @switch($grooming->order->confirmation)
+                                        @case('confirm')
+                                            <span
+                                                class="fw-bold badge {{ $grooming->order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $grooming->order->is_paid ? 'Paid' : 'Unpaid' }}</span>
+                                            <span
+                                                class="fw-bold badge {{ $grooming->order->payment_receipt != null ? 'bg-success' : 'bg-danger' }}">{{ $grooming->order->payment_receipt == null ? 'Belum Bayar' : 'Sudah Bayar' }}</span>
+                                        @break
+
+                                        @case('waiting')
+                                            <span class="badge bg-warning">Menunggu Konfirmasi</span>
+                                        @break
+
+                                        @default
+                                            <span class="badge bg-danger">Ditolak</span>
+                                    @endswitch
                                 </td>
                                 <td>{{ $grooming->date }}</td>
                                 <td>{{ $grooming->session->format('H:i') }}</td>

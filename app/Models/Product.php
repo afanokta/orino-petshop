@@ -13,19 +13,7 @@ class Product extends Model
         'name',
         'price',
         'description',
-        'image',
-        'stock',
     ];
-
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
-    }
-
-    public function carts()
-    {
-        return $this->hasMany(Cart::class);
-    }
 
     public function category() {
         return $this->belongsTo(Category::class);

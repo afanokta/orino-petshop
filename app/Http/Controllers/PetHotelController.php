@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\PetHotel;
+use App\Models\Product;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class PetHotelController extends Controller
             $data['end_date'] = $request->end_date;
             $data['start_date'] = $request->start_date;
         }
-        $pethotels = $pethotels->orderBy('start_date', 'asc')->orderBy('end_date', 'asc')->paginate(10);
+        $pethotels = $pethotels->orderBy('start_date', 'desc')->orderBy('end_date', 'asc')->paginate(10);
         $data['pethotels'] = $pethotels;
         return view('dashboard.pethotel.index', $data);
     }
@@ -38,7 +39,10 @@ class PetHotelController extends Controller
         // dd($dates);
         $invalidDates = [];
         foreach ($dates as $key => $value) {
-            $count = PetHotel::where('start_date', '<=', $value)
+            $count = PetHotel::whereHas('order', function ($q) {
+                return $q->whereIn('confirmation', ['waiting', 'confirm']);
+            })
+                ->where('start_date', '<=', $value)
                 ->where('end_date', '>=', $value)->count();
             if ($count >= 6) {
                 $invalidDates[] = $value;
@@ -63,7 +67,7 @@ class PetHotelController extends Controller
                 'vaccine' => $vaccine_path,
                 'medcheck' => $medcheck_path,
                 'user_id' => Auth::user()->id,
-                'product_id' => 2,
+                'product_id' => Product::where('name', 'LIKE', '%hotel')->first()->id,
             ]);
             $petHotel = PetHotel::create($request->all());
             $countDays = (int) date_diff(date_create($request['start_date']), date_create($request['end_date']))->format('%a');
@@ -102,6 +106,9 @@ class PetHotelController extends Controller
     public function update(Request $request, PetHotel $pethotel)
     {
         try {
+            $countDays = (int) date_diff(date_create($request['start_date']), date_create($request['end_date']))->format('%a');
+            $price = $pethotel->product->price * $countDays;
+            $pethotel->order->update(['price' => $price]);
             $pethotel->update($request->all());
         } catch (\Throwable $th) {
             return redirect()->route('admin.pethotel.index')->with('errors', 'Gagal Update Data');

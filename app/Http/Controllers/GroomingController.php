@@ -65,6 +65,9 @@ class GroomingController extends Controller
     {
         $invalidSession = Grooming::select('session', DB::raw('COUNT(*) as jumlah'))
             ->where('date', $request->date)
+            ->whereHas('order', function($q) {
+                return $q->whereIn('confirmation', ['waiting', 'confirm']);
+            })
             ->groupBy('session')
             ->havingRaw('COUNT(*) > 1')->get();
         return response()->json([
@@ -98,6 +101,8 @@ class GroomingController extends Controller
     public function update(Request $request, Grooming $grooming)
     {
         try {
+            $product = Product::find($request['product_id']);
+            $grooming->order->update(['price' => $product->price]);
             $grooming->update($request->all());
         } catch (\Throwable $th) {
             return redirect()->route('admin.grooming.index')->with('errors', 'Gagal Update Data');

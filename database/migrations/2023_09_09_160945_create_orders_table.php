@@ -18,6 +18,8 @@ return new class() extends Migration
             $table->integer('price');
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->morphs('service');
+            $table->enum('confirmation', ['confirm', 'reject', 'waiting'])->default('waiting');
+            $table->string('reject_message')->nullable();
             $table->timestamps();
         });
     }
