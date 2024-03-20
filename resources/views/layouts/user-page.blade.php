@@ -29,7 +29,9 @@
         <main class="py-4">
             {{ $content }}
         </main>
-        <x-footer />
+        @if (!Route::is('index_order'))
+            <x-footer />
+        @endif
     </div>
     @stack('script')
     <script>
