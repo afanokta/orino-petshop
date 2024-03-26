@@ -43,6 +43,65 @@
         $(".sidebar").css("padding", "0px");
         $(".content").css("margin-left", "0px");
     }
+
+        $('.confirm-logout').on('click', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Konfirmasi Logout',
+                    text: "Apakah Anda Yakin Ingin Logout?",
+                    type: 'warning',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#logout-form').trigger('submit')
+                    } else if (result.isDenied) {
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                });
+            });
+
+        $('.confirm-accept-grooming').on('click', function(e) {
+            e.preventDefault();
+            var acceptUrl = $(this).attr('href');
+
+            Swal.fire({
+                title: 'Konfirmasi Form Grooming',
+                text: "Apakah Anda Yakin Ingin Konfirmasi?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = acceptUrl;
+                }
+            });
+        });
+        
+        $('.confirm-accept-pethotel').on('click', function(e) {
+            e.preventDefault();
+            var acceptUrl = $(this).attr('href');
+
+            Swal.fire({
+                title: 'Konfirmasi Form Pet Hotel',
+                text: "Apakah Anda Yakin Ingin Konfirmasi?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = acceptUrl;
+                }
+            });
+        });
+        
 </script>
 
 </html>

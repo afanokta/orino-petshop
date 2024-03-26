@@ -2,15 +2,15 @@
     @slot('content')
         <div class="row my-2">
             <div class="col">
-                <a href="{{ route('admin.order.show', ['order' => $grooming->order->id]) }}" class="btn btn-primary">Lihat
+                <a href="{{ route('admin.order.show', ['order' => $grooming->order->id]) }}" class="btn btn-primary">Lihat 
                     Order</a>
                 @if ($grooming->order->confirmation == 'waiting')
-                    <a href="{{ route('admin.order.accept', ['order' => $grooming->order->id]) }}"
-                        class="btn btn-success">Terima
-                        Pesanan</a>
+                    <a id="accept-grooming" href="{{ route('admin.order.accept', ['order' => $grooming->order->id]) }}" 
+                        class="btn btn-success confirm-accept-grooming">Terima Pesanan</a>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject">Tolak Pesanan</button>
                 @endif
             </div>
+                       
         </div>
         <form action="{{ route('admin.grooming.update', ['grooming' => $grooming]) }}" method="POST">
             @csrf
@@ -92,7 +92,7 @@
                         <input type="text" name="note" placeholder="Catatan" class="form-control" required
                             value="{{ $grooming->note }}" />
                     </div>
-                    <input type="submit" value="Simpan Data" class="btn btn-success">
+                    <input type="submit" value="Simpan Data" class="btn btn-success mt-4">
                 </div>
             </div>
         </form>
@@ -103,7 +103,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content" style="background: #fdf9e5;">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Bukti Pembayaran</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Penolakan Form Grooming</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

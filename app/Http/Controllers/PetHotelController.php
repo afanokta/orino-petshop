@@ -25,8 +25,10 @@ class PetHotelController extends Controller
         }
         $pethotels = $pethotels->orderBy('start_date', 'desc')->orderBy('end_date', 'asc')->paginate(10);
         $data['pethotels'] = $pethotels;
+
         return view('dashboard.pethotel.index', $data);
     }
+
     public function pethotel_page()
     {
         $date_start = Carbon::now()->addDays(1);
@@ -36,7 +38,7 @@ class PetHotelController extends Controller
         foreach ($period as $key => $value) {
             $dates[] = $value->format('Y-m-d');
         }
-        // dd($dates);
+        
         $invalidDates = [];
         foreach ($dates as $key => $value) {
             $count = PetHotel::whereHas('order', function ($q) {
@@ -53,6 +55,7 @@ class PetHotelController extends Controller
             'date_end' => $date_end,
             'invalidDates' => $invalidDates,
         ];
+
         return view('pethotel_page', $data);
     }
 
@@ -71,13 +74,15 @@ class PetHotelController extends Controller
             ]);
             $petHotel = PetHotel::create($request->all());
             $countDays = (int) date_diff(date_create($request['start_date']), date_create($request['end_date']))->format('%a');
-            $price = $petHotel->product->price * $countDays;
+            $price = $petHotel->product->price * ($countDays + 1);
             $order = new Order(['user_id' => $request['user_id'], 'price' => $price]);
             $petHotel->order()->save($order);
+
             return redirect()->route('index_order')->with('success', 'Berhasil Memesan PetHotel, Silahkan Melakukan Pembayaran pada Halaman Order');
         } catch (\Throwable $th) {
             dd($th->getMessage());
-            return redirect()->back()->with('errors', 'Gagal Memesan Pethotel' . $th->getMessage());
+
+            return redirect()->back()->with('errors', 'Gagal Memesan Pethotel'.$th->getMessage());
         }
     }
 
@@ -92,9 +97,9 @@ class PetHotelController extends Controller
             $pethotel->order()->delete();
             $pethotel->delete();
         } catch (\Throwable $th) {
-            //throw $th;
             return redirect()->back()->with('errors', 'Gagal Menghapus Data');
         }
+
         return redirect()->back()->with('success', 'Berhasil Menghapus Data');
     }
 
@@ -113,7 +118,7 @@ class PetHotelController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('admin.pethotel.index')->with('errors', 'Gagal Update Data');
         }
+
         return redirect()->route('admin.pethotel.index')->with('success', 'Berhasil Update Data');
     }
-
 }

@@ -1,6 +1,6 @@
-@extends('layouts.app')
+<x-user-page>
 
-@section('content')
+@slot('content')
 <div style="text-align: center">
     <h1 style="font-weight:bolder">Selamat Datang Di Orino Petshop And Vet Clinic</h1>
     <h5 class="mt-3">Silahkan melakukan login terlebih dahulu!</h5>
@@ -81,4 +81,6 @@
                         position: fixed;
                         bottom: 0;
                         right: 0;">
-@endsection
+                        
+    @endslot
+</x-user-page>

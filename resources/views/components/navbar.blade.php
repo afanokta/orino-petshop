@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand fs-4 fw-bold" href="{{ route('landing_page') }}" style="color: #f9ca0f;">
             <img src="{{ asset('media/orino-logo.svg') }}" alt="orino-logo" style="width: 45px; height: auto;">
-            <p class="d-sm-inline d-none">Orino Petshop and Vet Clinic</p>
+            <p class="d-sm-inline d-none">Orino Petshop</p>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

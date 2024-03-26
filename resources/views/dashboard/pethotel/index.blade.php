@@ -7,7 +7,7 @@
             <form action="{{ route('admin.pethotel.index') }}" method="get">
                 <div class="row pb-3">
                     <div class="col-lg-3 col-12 pt-4">
-                        <a href="{{ route('pethotel_page') }}" class="btn btn-success">Tambah Data Pet Hotel</a>
+                        <a href="{{ route('pethotel_page') }}" class="btn btn-success">Tambah Jadwal Pet Hotel</a>
                     </div>
                     <div class="col-lg-3 col-12">
                         <label>Start Date:</label>

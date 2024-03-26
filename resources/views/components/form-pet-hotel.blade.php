@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label>No.HP</label>
-                            <input type="text" name="phone_number" placeholder="0821..." class="form-control"
+                            <input type="text" name="phone_number" placeholder="08..." class="form-control"
                                 required><br>
                         </div>
                         <div class="form-group">
@@ -51,7 +51,7 @@
                             </select><br>
                         </div>
                         <div class="form-group">
-                            <label>Usia</label>
+                            <label>Usia (Dalam Bulan)</label>
                             <input type="number" name="pet_age" placeholder="Usia Kucing" class="form-control"
                                 required><br>
                         </div>

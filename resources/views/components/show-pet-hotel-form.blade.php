@@ -23,11 +23,13 @@
             <input readonly value="{{ $order->service->pet_name }}" type="text" name="pet_name"
                 placeholder="Nama Hewan Peliharaan" class="form-control" required>
         </div>
+
         <div class="form-group mb-3">
             <label>Jenis Kelamin</label>
             <input readonly value="{{ $order->service->pet_gender }}" type="text" name="pet_gender"
                 placeholder="Nama Hewan Peliharaan" class="form-control" required>
         </div>
+
         <div class="div">
             <p>Sertifikat Vaksin</p>
             <img src="{{ Storage::url($order->service->vaccine) }}" alt="" class="img-fluid">
@@ -35,9 +37,9 @@
     </div>
     <div class="col">
         <div class="form-group mb-3">
-            <label>Sinyalement</label>
-            <input readonly value="{{ $order->service->sinyalement }}" type="text" name="sinyalement"
-                placeholder="Jenis Kelamin Hewan" class="form-control" required>
+            <label>Usia (Dalam Bulan)</label>
+            <input readonly value="{{ $order->service->pet_age }}" type="text" name="pet_age"
+                placeholder="Usia Kucing dalam Bulan" class="form-control" required>
         </div>
 
         <div class="form-group mb-3">
@@ -45,16 +47,25 @@
             <input readonly value="{{ $order->service->equipment }}" type="text" name="equipment"
                 placeholder="Perlengkapan" class="form-control" required>
         </div>
+
         <div class="form-group mb-3">
             <label for="jadwalTanggal">Tanggal Mulai</label>
             <input readonly value="{{ $order->service->start_date }}" type="date" id="jadwalTanggal"
                 class="form-control" name="start_date" required readonly>
         </div>
+        
         <div class="form-group mb-3">
             <label for="sesi-jadwal">Tanggal Selesai</label>
             <input readonly value="{{ $order->service->end_date }}" type="date" class="form-control" id="sesi-jadwal"
                 name="end_date" required readonly>
         </div>
+        
+        <div class="form-group mb-3">
+            <label>Harga</label>
+            <input readonly value="{{ $order->price }}" type="text" name="price"
+               placeholder="Price" class="form-control" required>
+        </div>
+
         <div class="div">
             <p>Medical Check</p>
             <img src="{{ Storage::url($order->service->medcheck) }}" alt="" class="img-fluid">

@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Pet Hotel',
             'description' => 'Pet Hotel yang terjamin',
-            'price' => 35000,
+            'price' => 30000,
             'category_id' => 1,
         ]);
     }

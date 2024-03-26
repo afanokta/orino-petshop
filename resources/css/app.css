@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 section {
     padding-top: 64px;
     position: relative;
@@ -280,7 +284,12 @@ section::before {
         z-index: -1;
         right: 0;
         width: 280px;
+        right: -100px;
         height: auto;
+    }
+
+    .no-top {
+        top: 70px;
     }
 
     .persegi2 {
@@ -288,6 +297,7 @@ section::before {
         z-index: -1;
         left: 0;
         width: 280px;
+        left: -100px;
         height: auto;
     }
 

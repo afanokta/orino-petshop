@@ -6,11 +6,11 @@ use App\Http\Controllers\GroomingController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PetHotelController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,13 +31,14 @@ Route::get('/orino-page', [LandingController::class, 'landing_page'])->name('lan
 Auth::routes();
 
 // Product
-Route::post('feedback', [FeedbackController::class, 'store'])->name('feedback.store')->middleware('guest');
+Route::post('feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
 Route::middleware(['admin'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
         Route::post('/order/{order}/confirm', [OrderController::class, 'confirm_payment'])->name('admin.order.confirm');
+        Route::post('/order/{order}/rejectPayment', [OrderController::class, 'reject_payment'])->name('admin.order.rejectPayment');
         Route::get('/order/{order}/accept', [OrderController::class, 'acceptOrder'])->name('admin.order.accept');
         Route::post('/order/{order}/reject', [OrderController::class, 'rejectOrder'])->name('admin.order.reject');
 
@@ -50,10 +51,8 @@ Route::middleware(['admin'])->group(function () {
     });
 });
 
-
 Route::get('/grooming-page', [GroomingController::class, 'grooming_page'])->name('grooming_page');
 Route::get('/pethotel', [PetHotelController::class, 'pethotel_page'])->name('pethotel_page');
-
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('feedback', FeedbackController::class)->except(['store', 'index']);

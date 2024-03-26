@@ -55,7 +55,7 @@
                     </a>
                     <div class="card-body text-center">
                         <h5 class="card-title fw-bold">Feedback</h5>
-                        <p class="card-text">Lihat Semua Data Feedback dari Konsumen</p>
+                        <p class="card-text">Lihat Semua Data Feedback dari Pelanggan</p>
                     </div>
                 </div>
             </div>

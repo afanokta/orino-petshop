@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h5 style="color: #000000">Tentang Kami</h5>
-                <p style="text-align: justify; max-width:570px;">Orino Petshop And Vet Clinic hadir untuk
+                <p style="text-align: justify; max-width:570px;">Orino Petshop hadir untuk
                     memenuhi kebutuhan hewan peliharaan Anda.
                     Kami berkomitmen untuk memberikan kenyamanan dan keamanan bagi teman-teman berbulu Anda.</p>
             </div>
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="col d-flex align-items-center" id="maps-icon">
-                        <a href="https://maps.app.goo.gl/KYrnMsjcFjZgmwhQA" target="_blank">
+                        <a href="https://food.grab.com/id/id/restaurant/orino-petshop-tunggulwulung-delivery/6-C26EG3WXTBWADE" target="_blank">
                             <img class="sosmed" src="{{ asset('media/grabmart.svg') }}" alt="maps-logo"
                                 style="width: 40px; height:auto;">
                         </a>
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="col d-flex align-items-center" id="maps-icon">
-                        <a href="https://maps.app.goo.gl/KYrnMsjcFjZgmwhQA" target="_blank">
+                        <a href="https://www.tokopedia.com/orinopetshop" target="_blank">
                             <img class="sosmed" src="{{ asset('media/tokped.svg') }}" alt="maps-logo"
                                 style="width: 40px; height:auto;">
                         </a>
@@ -43,7 +43,7 @@
                         <p class="mb-0 ms-2 fw-bold">@orinopetshop</p>
                     </div>
 
-                    <div class="col-auto d-flex align-items-center" id="whatsapp-icon">
+                    <div class="col-auto mt-2 d-flex align-items-center" id="whatsapp-icon">
                         <a href="https://wa.me/6281230697181?text=Halo,%20Kak" target="_blank">
                             <img class="sosmed me-2" src="{{ asset('media/whatsapp-logo.svg') }}" alt="whatsapp-logo"
                                 style="width: 40px; height:auto;">
@@ -52,6 +52,14 @@
                             <a class="mb-0 fw-bold" href="https://wa.me/6281230697181?text=Halo,%20Kak">
                                 +62-812-3069-7181</a>
                         </div>
+                    </div>
+
+                    <div class="col d-flex align-items-center" id="orino-logo">
+                        <a href="https://shopee.co.id/orinopetshopmlg" target="_blank">
+                            <img class="sosmed" src="{{ asset('media/shopee.svg') }}" alt="ig-logo"
+                                style="width: 40px; height:auto;">
+                        </a>
+                        <p class="mb-0 ms-2 fw-bold">Shopee</p>
                     </div>
 
                 </div>

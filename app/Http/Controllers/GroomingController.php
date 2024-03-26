@@ -17,7 +17,7 @@ class GroomingController extends Controller
         $services = Product::whereHas('category', function ($query) {
             $query->where('name', 'LIKE', '%grooming%');
         })->get();
-        // dd($service);
+
         $date_start = Carbon::now()->addDays(1);
         $date_end = Carbon::now()->addMonths(1);
         $data = [
@@ -25,6 +25,7 @@ class GroomingController extends Controller
             'date_end' => $date_end,
             'services' => $services,
         ];
+
         return view('grooming_page', $data);
     }
 
@@ -32,6 +33,7 @@ class GroomingController extends Controller
     {
         return view('show_groomingForm');
     }
+
     public function index(Request $request)
     {
         $data = [];
@@ -43,6 +45,7 @@ class GroomingController extends Controller
         }
         $groomings = $groomings->orderBy('date', 'desc')->orderBy('session', 'asc')->paginate(10);
         $data['groomings'] = $groomings;
+
         return view('dashboard.grooming.index', $data);
     }
 
@@ -56,20 +59,23 @@ class GroomingController extends Controller
             $grooming->order()->save($order);
         } catch (\Throwable $th) {
             dd($th->getMessage());
+
             return redirect()->back()->with('errors', 'Pemesanan Gagal Dilakukan');
         }
-        return redirect()->route('index_order')->with('success', 'Berhasil Memsan Grooming, Silahkan Melakukan Pembayaran pada Halaman Order');
+
+        return redirect()->route('index_order')->with('success', 'Berhasil Memesan Grooming, Silahkan Melakukan Pembayaran pada Halaman Order');
     }
 
     public function checkJadwal(Request $request)
     {
         $invalidSession = Grooming::select('session', DB::raw('COUNT(*) as jumlah'))
             ->where('date', $request->date)
-            ->whereHas('order', function($q) {
+            ->whereHas('order', function ($q) {
                 return $q->whereIn('confirmation', ['waiting', 'confirm']);
             })
             ->groupBy('session')
             ->havingRaw('COUNT(*) > 1')->get();
+
         return response()->json([
             'session' => $invalidSession,
         ]);
@@ -86,15 +92,17 @@ class GroomingController extends Controller
             $grooming->order()->delete();
             $grooming->delete();
         } catch (\Throwable $th) {
-            //throw $th;
+            // throw $th;
             return redirect()->back()->with('errors', 'Gagal Menghapus Data');
         }
+
         return redirect()->back()->with('success', 'Berhasil Menghapus Data');
     }
 
     public function edit(Grooming $grooming)
     {
         $products = Product::where('name', 'LIKE', '%grooming%')->get();
+
         return view('dashboard.grooming.edit', compact('grooming', 'products'));
     }
 
@@ -107,6 +115,7 @@ class GroomingController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('admin.grooming.index')->with('errors', 'Gagal Update Data');
         }
+
         return redirect()->route('admin.grooming.index')->with('success', 'Berhasil Update Data');
     }
 }

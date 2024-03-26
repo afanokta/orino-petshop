@@ -64,7 +64,7 @@
 
                         <div class="form-group">
                             <label>No.HP</label>
-                            <input type="text" name="phone_number" placeholder="0821..." class="form-control"
+                            <input type="text" name="phone_number" placeholder="08..." class="form-control"
                                 required><br>
                         </div>
 
@@ -83,8 +83,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Usia (Dalam Bulan: Minimal <span class="text-danger"> 3 Bulan)</span></label>
+                            <input min="3" type="number" name="pet_age" placeholder="Usia Kucing Minimal 3 Bulan"
+                                class="form-control" required><br>
+                        </div>
+
+                        <div class="form-group">
                             <label>Sinyalement</label>
-                            <input type="text" name="sinyalement" placeholder="Jenis Kelamin Hewan"
+                            <input type="text" name="sinyalement" placeholder="Ciri-ciri Kucing Anda"
                                 class="form-control" required><br>
                         </div>
 
@@ -99,7 +105,7 @@
                                 readonly>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="sesi-jadwal">Sesi Pemesanana</label>
+                            <label for="sesi-jadwal">Sesi Pemesanan</label>
                             <input type="time" class="form-control" id="sesi-jadwal" name="session" required
                                 readonly>
                         </div>
@@ -109,7 +115,7 @@
                             <select name="product_id" class="form-select" required>
                                 <option value="">Pilih Layanan Grooming</option>
                                 @foreach ($services as $s)
-                                    <option value="{{ $s->id }}">{{ $s->name }}</option>
+                                    <option value="{{ $s->id }}"> {{ $s->name }} - Rp.{{ $s->price}}</option>
                                 @endforeach
                             </select><br>
                         </div>

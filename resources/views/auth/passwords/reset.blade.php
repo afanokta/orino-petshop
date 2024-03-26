@@ -1,6 +1,6 @@
-@extends('layouts.app')
+<x-user-page>
 
-@section('content')
+@slot('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,4 +62,5 @@
         </div>
     </div>
 </div>
-@endsection
+@endslot
+</x-user-page>

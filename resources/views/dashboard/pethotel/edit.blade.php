@@ -5,9 +5,8 @@
                 <a href="{{ route('admin.order.show', ['order' => $pethotel->order->id]) }}" class="btn btn-primary">Lihat
                     Order</a>
                 @if ($pethotel->order->confirmation == 'waiting')
-                    <a href="{{ route('admin.order.accept', ['order' => $pethotel->order->id]) }}"
-                        class="btn btn-success">Terima
-                        Pesanan</a>
+                    <a id="accept-pethotel" href="{{ route('admin.order.accept', ['order' => $pethotel->order->id]) }}"
+                        class="btn btn-success confirm-accept-pethotel">Terima Pesanan</a>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject">Tolak Pesanan</button>
                 @endif
             </div>
@@ -80,7 +79,7 @@
                             value="{{ $pethotel->note }}" />
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3" style="width:500px; height:auto;">
                         <label>Sertifikat Vaksin</label>
                         @if ($pethotel->vaccine != null)
                             <img src="{{ Storage::url($pethotel->vaccine) }}" alt="" class="img-fluid">
@@ -88,7 +87,7 @@
                             <h5 class="badge bg-danger">Tidak Ada Data</h5>
                         @endif
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3" style="width:500px; height:auto;">
                         <label>File Medical Check Up H-1</label>
                         @if ($pethotel->medcheck != null)
                             <img src="{{ Storage::url($pethotel->medcheck) }}" alt="" class="img-fluid">
@@ -96,7 +95,7 @@
                             <h5 class="badge bg-danger">Tidak Ada Data</h5>
                         @endif
                     </div>
-                    <input type="submit" value="Simpan Data" class="btn btn-success">
+                    <input type="submit" value="Simpan Data" class="btn btn-success mt-4">
                 </div>
             </div>
         </form>
@@ -106,7 +105,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content" style="background: #fdf9e5;">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Bukti Pembayaran</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Penolakan Form Pet Hotel</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>

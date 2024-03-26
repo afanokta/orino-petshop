@@ -1,10 +1,13 @@
 <x-dashboard>
     @slot('content')
-        @if (!$order->is_paid)
-            <form action="{{ route('admin.order.confirm', ['order' => $order->id]) }}" method="POST" class="mb-3 h-100">
-                @csrf
-                <button type="submit" class="btn btn-success">Konfirmasi Pembayaran</button>
-            </form>
+    @if (!$order->is_paid)
+            <div class="d-flex mb-3">
+                <form action="{{ route('admin.order.confirm', ['order' => $order->id]) }}" method="POST" class="h-100">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Konfirmasi Pembayaran</button>
+                </form>
+                <button class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#rejectPayment">Tolak Pembayaran</button>
+            </div>
         @endif
         <form action="">
             <div class="row">
@@ -43,19 +46,25 @@
                     <div class="form-group mb-3">
                         <h6>Status:
                             @switch($order->confirmation)
+                                @case('accept_form')
                                 @case('confirm')
+                                    <span class="badge bg-success">Form Diterima</span>
                                     <span
                                         class="fw-bold badge {{ $order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $order->is_paid ? 'Paid' : 'Unpaid' }}</span>
                                     <span
                                         class="fw-bold badge {{ $order->payment_receipt != null ? 'bg-success' : 'bg-danger' }}">{{ $order->payment_receipt == null ? 'Belum Bayar' : 'Sudah Bayar' }}</span>
                                 @break
 
-                                @case('waiting')
-                                    <span class="badge bg-warning">Menunggu Konfirmasi</span>
+                                @case('reject_form')
+                                    <span class="badge bg-danger">Form Ditolak</span>
+                                @break
+
+                                @case('reject')
+                                    <span class="badge bg-danger">Pembayaran DItolak</span>
                                 @break
 
                                 @default
-                                    <span class="badge bg-danger">Ditolak</span>
+                                <span class="badge bg-warning">Menunggu Konfirmasi</span>
                             @endswitch
                         </h6>
                     </div>
@@ -84,5 +93,29 @@
                 </div>
             </div>
         </form>
+        <div class="modal fade" id="rejectPayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form action="{{ route('admin.order.rejectPayment', ['order' => $order->id]) }}" method="POST">
+                @csrf
+                <div class="modal-dialog">
+                    <div class="modal-content" style="background: #fdf9e5;">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Penolakan Pembayaran</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Alasan Penolakan</label>
+                                <textarea class="form-control" name="reject_message" id="" cols="30" rows="10"
+                                    placeholder="Masukkan Alasan Penolakan"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-warning text-white">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     @endslot
 </x-dashboard>

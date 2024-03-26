@@ -66,8 +66,8 @@
                 </h1>
                 <div id="garis-bawah" class="garisbawah mb-4"></div>
                 <br>
-                <h4><strong class="fw-bold text-warning">Orino Petshop And Vet
-                        Clinic </strong> menyediakan berbagai jenis layanan grooming untuk memastikan kesehatan dan
+                <h4><strong class="fw-bold text-warning">Orino Petshop </strong> 
+                    menyediakan berbagai jenis layanan grooming untuk memastikan kesehatan dan
                     kebersihan hewan peliharaan Anda. Pilihlah dari empat varian grooming berikut sesuai kebutuhan:</h4>
 
                 <div id="demo" class="carousel slide mt-4" data-bs-ride="carousel">
@@ -125,11 +125,7 @@
             </div>
             <x-form-grooming :services="$services" />
             <br><br>
-            {{-- @else
-                <div class="text-center">
-                    <h3 class="fw-bold mb-3" id="pesangrooming">Silahkan Login Untuk Dapat Memesan Layanan</h3>
-                </div>
-            @endif --}}
+           
         </section>
     @endslot
     @push('script')
@@ -167,7 +163,7 @@
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     selectable: true,
-                    hiddenDays: [5], // hide Mondays, Wednesdays, and Fridays
+                    hiddenDays: [5], 
                     headerToolbar: {
                         left: 'prev,next today',
                         center: 'title',

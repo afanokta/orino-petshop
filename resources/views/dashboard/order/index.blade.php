@@ -53,6 +53,8 @@
                                 <td>
                                     @switch($order->confirmation)
                                         @case('confirm')
+                                        @case('accept_form')
+                                            <span class="badge bg-success">Form Diterima</span>
                                             <span
                                                 class="fw-bold badge {{ $order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $order->is_paid ? 'Paid' : 'Unpaid' }}</span>
                                             <span
@@ -61,6 +63,10 @@
 
                                         @case('waiting')
                                             <span class="badge bg-warning">Menunggu Konfirmasi</span>
+                                        @break
+                                        
+                                        @case('reject_form')
+                                            <span class="badge bg-danger">Form Ditolak</span>
                                         @break
 
                                         @default

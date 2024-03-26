@@ -6,9 +6,7 @@
 
             <form action="{{ route('admin.feedback.index') }}" method="get">
                 <div class="row pb-3">
-                    {{-- <div class="col-md-5 pt-4">
-                        <a href="{{ route('index_feedback') }}" class="btn btn-success">Go To feedback</a>
-                    </div> --}}
+                    
                     <div class="col-md-3">
                         <label>Start Date:</label>
                         <input type="date" name="start_date" class="form-control" required value={{ $start_date ?? '' }}>

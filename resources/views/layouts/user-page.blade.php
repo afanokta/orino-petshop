@@ -29,7 +29,8 @@
         <main class="py-4">
             {{ $content }}
         </main>
-        @if (!Route::is('index_order'))
+        @if (!in_array(Route::currentRouteName(), ['index_order', 'login', 'register', 'verify', 'password.confirm', 'password.email', 
+        'password.request', 'show_profile']))
             <x-footer />
         @endif
     </div>

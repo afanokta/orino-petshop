@@ -12,7 +12,7 @@
                         right: 0;
                         top:0;">
 
-        <img src="{{ asset('media/rec-2.svg') }}" alt="rectangle2" class="persegi2">
+        <img src="{{ asset('media/rec-2.svg') }}" alt="rectangle2" class="persegi2 no-top">
 
         <section class="tentang-kami-container container">
             <div class="container">
@@ -31,7 +31,7 @@
                             style="margin-left: 0;
                     max-width:680px; text-align:justify;">Selamat datang
                             di <strong class="fw-bold text-warning"> Orino
-                                Petshop And Vet Clinic. </strong>
+                                Petshop. </strong>
                             Temukan kehangatan dan perawatan yang tak terlupakan untuk teman berbulu anda.
                             Kami hadir untuk memastikan kebahagiaan dan kenyamanan maksimal
                             bagi hewan peliharaan anda.</h3>
@@ -53,8 +53,7 @@
                 </h1>
                 <div id="garis-bawah" class="garisbawah mb-4"></div>
                 <br>
-                <h4><strong class="fw-bold text-warning">Orino Petshop And Vet
-                        Clinic </strong> hadir untuk memenuhi kebutuhan hewan peliharaan Anda. Tersedia layanan grooming,
+                <h4><strong class="fw-bold text-warning">Orino Petshop</strong> hadir untuk memenuhi kebutuhan hewan peliharaan Anda. Tersedia layanan grooming,
                     pet hotel dan pakan untuk hewan peliharaan. Dengan layanan grooming berkualitas tinggi
                     juga bervariasi dan penginapan yang nyaman
                     bagi anabul. Orino Petshop, tempat di mana kebahagiaan hewan

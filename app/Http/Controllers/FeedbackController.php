@@ -21,6 +21,7 @@ class FeedbackController extends Controller
         }
         $feedbacks = $feedbacks->orderBy('created_at', 'desc')->paginate(10);
         $data['feedbacks'] = $feedbacks;
+
         return view('dashboard.feedback.index', $data);
     }
 
@@ -29,7 +30,6 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -41,8 +41,10 @@ class FeedbackController extends Controller
             Feedback::create($request->all());
         } catch (\Throwable $th) {
             dd($th->getMessage());
+
             return redirect()->back()->with('errors', 'Gagal Mengirimkan Feedback');
         }
+
         return redirect()->back()->with('success', 'Berhasil Mengirimkan Feedback');
     }
 
@@ -60,7 +62,6 @@ class FeedbackController extends Controller
      */
     public function edit(feedback $feedback)
     {
-        //
     }
 
     /**
@@ -68,7 +69,6 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, feedback $feedback)
     {
-        //
     }
 
     /**
@@ -79,9 +79,10 @@ class FeedbackController extends Controller
         try {
             $feedback->delete();
         } catch (\Throwable $th) {
-            //throw $th;
+            // throw $th;
             return redirect()->back()->with('errors', 'Gagal Menghapus Data');
         }
+
         return redirect()->back()->with('success', 'Berhasil Menghapus Data');
     }
 }

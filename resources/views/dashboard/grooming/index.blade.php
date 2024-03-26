@@ -7,7 +7,7 @@
             <form action="{{ route('admin.grooming.index') }}" method="get">
                 <div class="row pb-3">
                     <div class="col-lg-3 col-12 pt-4">
-                        <a href="{{ route('grooming_page') }}" class="btn btn-success">Tambah Data Grooming</a>
+                        <a href="{{ route('grooming_page') }}" class="btn btn-success">Tambah Jadwal Grooming</a>
                     </div>
                     <div class="col-lg-3 col-12">
                         <label>Start Date:</label>
@@ -64,7 +64,7 @@
                                         @break
 
                                         @default
-                                            <span class="badge bg-danger">Ditolak</span>
+                                            <span class="badge bg-danger">Form Ditolak</span>
                                     @endswitch
                                 </td>
                                 <td>{{ $grooming->date }}</td>

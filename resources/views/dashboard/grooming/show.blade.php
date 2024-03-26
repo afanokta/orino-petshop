@@ -5,13 +5,13 @@
                 <a href="{{ route('admin.order.show', ['order' => $grooming->order->id]) }}" class="btn btn-primary">Lihat
                     Order</a>
                 <a href="{{ route('admin.grooming.edit', ['grooming' => $grooming->id]) }}"
-                    class="btn btn-warning">Edit
+                    class="btn btn-warning ms-1">Edit
                     Data</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6 col-12">
-                <div class="form-group mb-2">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-12">
+                <div class="form-group mb-2 mt-2">
                     @switch($grooming->order->confirmation)
                         @case('waiting')
                             <label>Status : <span class="badge bg-warning">Menunggu Konfirmasi</span></label>
@@ -58,28 +58,26 @@
                         value="{{ $grooming->phone_number }}" />
                 </div>
 
-            </div>
-            <div class="col-lg-6 col-12">
-                <div class="form-group mb-2">
-                    <label>Nama Kucing</label>
-                    <input type="text" name="pet_name" placeholder="Nama Kucing Peliharaan" class="form-control" readonly
-                        value="{{ $grooming->pet_name }}" />
-                </div>
-                <div class="form-group mb-2">
-                    <label>Jenis Kelamin</label>
-                    <input type="text" name="pet_age" placeholder="Usia Kucing" class="form-control" readonly
-                        value="{{ $grooming->pet_gender }}" />
-                </div>
-                <div class="form-group mb-2">
-                    <label>Sinyalement</label>
-                    <input type="text" name="pet_food" placeholder="Merk Makanan" class="form-control" readonly
-                        value="{{ $grooming->sinyalement }}" />
-                </div>
-                <div class="form-group mb-2">
-                    <label>Catatan</label>
-                    <input type="text" name="note" placeholder="Catatan" class="form-control" readonly
-                        value="{{ $grooming->note }}" />
-                </div>
+                    <div class="form-group mb-2">
+                        <label>Nama Kucing</label>
+                        <input type="text" name="pet_name" placeholder="Nama Kucing Peliharaan" class="form-control" readonly
+                            value="{{ $grooming->pet_name }}" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Jenis Kelamin</label>
+                        <input type="text" name="pet_age" placeholder="Usia Kucing" class="form-control" readonly
+                            value="{{ $grooming->pet_gender }}" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Sinyalement</label>
+                        <input type="text" name="pet_food" placeholder="Merk Makanan" class="form-control" readonly
+                            value="{{ $grooming->sinyalement }}" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Catatan</label>
+                        <input type="text" name="note" placeholder="Catatan" class="form-control" readonly
+                            value="{{ $grooming->note }}" />
+                    </div>
             </div>
         </div>
     @endslot

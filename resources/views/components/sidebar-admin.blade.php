@@ -54,7 +54,7 @@
     <div class="dropdown position-absolute bottom-0 mb-3">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+            <img src="{{ asset('media/orino-logo.svg') }}" alt="orino-logo" width="32" height="32"
                 class="rounded-circle me-2">
             <strong>Admin Orino</strong>
         </a>
@@ -63,7 +63,7 @@
             <li>
                 <form id="logout-form" class="" action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <input type="submit" class="dropdown-item text-white" value="Logout" />
+                    <input type="button" class="dropdown-item text-white confirm-logout" value="Logout" />
                 </form>
             </li>
         </ul>

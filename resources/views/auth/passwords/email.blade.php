@@ -1,11 +1,11 @@
-@extends('layouts.app')
+<x-user-page>
 
-@section('content')
+@slot('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header" style="background-color: #FFEFB0">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -44,4 +44,5 @@
         </div>
     </div>
 </div>
-@endsection
+@endslot
+</x-user-page>

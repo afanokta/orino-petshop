@@ -16,6 +16,7 @@ class Grooming extends Model
         'phone_number',
         'pet_name',
         'pet_gender',
+        'pet_age',
         'sinyalement',
         'equipment',
         'date',
@@ -26,6 +27,7 @@ class Grooming extends Model
     protected $casts = [
         'session' => 'datetime:H:i',
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
