@@ -53,19 +53,25 @@
                                 <td>
                                     @switch($grooming->order->confirmation)
                                         @case('confirm')
-                                            <span
-                                                class="fw-bold badge {{ $grooming->order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $grooming->order->is_paid ? 'Paid' : 'Unpaid' }}</span>
-                                            <span
-                                                class="fw-bold badge {{ $grooming->order->payment_receipt != null ? 'bg-success' : 'bg-danger' }}">{{ $grooming->order->payment_receipt == null ? 'Belum Bayar' : 'Sudah Bayar' }}</span>
-                                        @break
+                                            @case('accept_form')
+                                                <span class="badge bg-success">Form Diterima</span>
+                                                <span
+                                                    class="fw-bold badge {{ $grooming->order->is_paid ? 'bg-success' : 'bg-danger' }}">{{ $grooming->order->is_paid ? 'Paid' : 'Unpaid' }}</span>
+                                                <span
+                                                    class="fw-bold badge {{ $grooming->order->payment_receipt != null ? 'bg-success' : 'bg-danger' }}">{{ $grooming->order->payment_receipt == null ? 'Belum Bayar' : 'Sudah Bayar' }}</span>
+                                            @break
 
-                                        @case('waiting')
-                                            <span class="badge bg-warning">Menunggu Konfirmasi</span>
-                                        @break
+                                            @case('waiting')
+                                                <span class="badge bg-warning">Menunggu Konfirmasi</span>
+                                            @break
+                                            
+                                            @case('reject_form')
+                                                <span class="badge bg-danger">Form Ditolak</span>
+                                            @break
 
-                                        @default
-                                            <span class="badge bg-danger">Form Ditolak</span>
-                                    @endswitch
+                                            @default
+                                                <span class="badge bg-danger">Ditolak</span>
+                                        @endswitch
                                 </td>
                                 <td>{{ $grooming->date }}</td>
                                 <td>{{ $grooming->session->format('H:i') }}</td>
