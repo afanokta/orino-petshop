@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-3 col-12 pt-4">
                         <button type="submit" class="btn btn-warning fw-bold">Filter</button>
-                        <a href="{{ route('admin.pethotel.index') }}" class="btn btn-success">Cari Semua Data</a>
+                        <a href="{{ route('admin.grooming.index') }}" class="btn btn-success">Cari Semua Data</a>
                     </div>
                 </div>
             </form>
