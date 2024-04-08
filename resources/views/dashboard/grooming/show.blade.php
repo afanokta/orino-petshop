@@ -11,21 +11,6 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-7 col-12">
-                <div class="form-group mb-2 mt-2">
-                    @switch($grooming->order->confirmation)
-                        @case('waiting')
-                            <label>Status : <span class="badge bg-warning">Menunggu Konfirmasi</span></label>
-                        @break
-
-                        @case('confirm')
-                            <label>Status : <span class="badge bg-success">Diterima</span></label>
-                        @break
-
-                        @default
-                            <label class="mb-2">Status : <span class="badge bg-danger">Ditolak</span></label>
-                            <input type="text" class="form-control" value="{{ $grooming->order->reject_message }}" readonly>
-                    @endswitch
-                </div>
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <div class="form-group mb-2">
