@@ -56,14 +56,13 @@
         <section id="fasilitas-ph" class="fasilitas-ph-container container">
             <div style="text-align: center;">
                 <h1 class="fw-bold mb-3">
-                    Fasilitas Pet Hotel
+                    Syarat Pet Hotel
                 </h1>
                 <div id="garis-bawah" class="garisbawah mb-4"></div>
                 <br>
-                <h4><strong class="fw-bold text-warning">Orino Petshop And Vet
-                        Clinic </strong> menawarkan penginapan khusus untuk hewan peliharaan Anda dengan
-                    perhatian dan kenyamanan maksimal. Pilihlah layanan penginapan kami yang sesuai dengan
-                    kebutuhan hewan peliharaan Anda:</h4>
+                <h4>Hanya dengan<strong class="fw-bold text-warning"> Rp30.000 
+                    </strong> per hari nya, Kami menawarkan penginapan khusus untuk hewan peliharaan Anda dengan
+                    perhatian dan kenyamanan maksimal. Berikut persayaratan dalam layanan Kami:</h4>
 
                 <div id="demo" class="carousel slide mt-4" data-bs-ride="carousel">
 

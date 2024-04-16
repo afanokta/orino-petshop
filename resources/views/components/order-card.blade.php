@@ -86,7 +86,7 @@
                             @endif
                             <button type="button" class="btn btn-success text-white fw-bold" data-bs-toggle="modal"
                                 data-bs-target="#checkForm{{ $order->id }}">
-                                Check Form
+                                Check Order
                             </button>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content" style="background: #fdf9e5;">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Form</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Order</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>

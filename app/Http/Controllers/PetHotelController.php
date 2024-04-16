@@ -38,7 +38,7 @@ class PetHotelController extends Controller
         foreach ($period as $key => $value) {
             $dates[] = $value->format('Y-m-d');
         }
-        
+
         $invalidDates = [];
         foreach ($dates as $key => $value) {
             $count = PetHotel::whereHas('order', function ($q) {
@@ -110,6 +110,12 @@ class PetHotelController extends Controller
 
     public function update(Request $request, PetHotel $pethotel)
     {
+        $today = Carbon::now();
+
+        if ($request->start_date < $today || $request->end_date < $today) {
+            return redirect()->back()->with('errors', 'Tidak dapat mengubah tanggal reservasi yang sudah lewat hari ini.');
+        }
+
         try {
             $countDays = (int) date_diff(date_create($request['start_date']), date_create($request['end_date']))->format('%a');
             $price = $pethotel->product->price * $countDays;

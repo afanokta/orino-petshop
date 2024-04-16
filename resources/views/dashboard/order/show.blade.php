@@ -60,7 +60,7 @@
                                 @break
 
                                 @case('reject')
-                                    <span class="badge bg-danger">Pembayaran DItolak</span>
+                                    <span class="badge bg-danger">Pembayaran Ditolak</span>
                                 @break
 
                                 @default

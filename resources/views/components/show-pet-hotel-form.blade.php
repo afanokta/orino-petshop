@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-group mb-3">
-            <label>No.HP</label>
+            <label>No. HP</label>
             <input readonly value="{{ $order->service->phone_number }}" type="text" name="phone_number"
                 placeholder="0821..." class="form-control" required>
         </div>
@@ -37,15 +37,9 @@
     </div>
     <div class="col">
         <div class="form-group mb-3">
-            <label>Usia (Dalam Bulan)</label>
-            <input readonly value="{{ $order->service->pet_age }}" type="text" name="pet_age"
-                placeholder="Usia Kucing dalam Bulan" class="form-control" required>
-        </div>
-
-        <div class="form-group mb-3">
-            <label>Perlengkapan yang Dibawa</label>
-            <input readonly value="{{ $order->service->equipment }}" type="text" name="equipment"
-                placeholder="Perlengkapan" class="form-control" required>
+            <label>Merk Pakan</label>
+            <input type="text" name="pet_food" placeholder="Merk Makanan" class="form-control"
+                value="{{ $order->service->pet_food }}" readonly />
         </div>
 
         <div class="form-group mb-3">
@@ -59,10 +53,16 @@
             <input readonly value="{{ $order->service->end_date }}" type="date" class="form-control" id="sesi-jadwal"
                 name="end_date" required readonly>
         </div>
+
+        <div class="form-group mb-3">
+            <label>Catatan</label>
+            <input type="text" name="pet_food" placeholder="Merk Makanan" class="form-control"
+                value="{{ $order->service->note }}" readonly />
+        </div>
         
         <div class="form-group mb-3">
             <label>Harga</label>
-            <input readonly value="{{ $order->price }}" type="text" name="price"
+            <input readonly value="Rp.{{ $order->price }}" type="text" name="price"
                placeholder="Price" class="form-control" required>
         </div>
 
