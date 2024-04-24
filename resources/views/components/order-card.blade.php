@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-around my-2">
-                            @if ($order->confirmation == 'confirm')
+                            @if ($order->confirmation == 'confirm' || $order->payment_receipt != null)
                                 <button type="button" class="btn btn-primary text-white fw-bold" data-bs-toggle="modal"
                                     data-bs-target="#buktiBayar{{ $order->id }}">Lihat Bukti Bayar</button>
                             @else
