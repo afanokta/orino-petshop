@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <!-- Pet Hotel Orders -->
+                    <!-- PetHotel Orders -->
                     <div class="card">
                         <div class="card-header fw-bold" style="background-color: #FFEFB0">{{ __('Grooming Orders') }}</div>
                         <x-order-card :orders="$groomingOrders"></x-order-card>
