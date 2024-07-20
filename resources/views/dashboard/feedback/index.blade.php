@@ -6,7 +6,7 @@
 
             <form action="{{ route('admin.feedback.index') }}" method="get">
                 <div class="row pb-3">
-                    
+
                     <div class="col-md-3">
                         <label>Start Date:</label>
                         <input type="date" name="start_date" class="form-control" required value={{ $start_date ?? '' }}>
@@ -49,6 +49,7 @@
                                 <td class="">
                                     <a href="{{ route('admin.feedback.show', ['feedback' => $feedback->id]) }}"
                                         class="btn btn-success"><i class="bi bi-eye"></i></a>
+                                    @if (Auth::user()->is_admin())
                                     <form id="delete-form{{ $feedback->id }}"
                                         action="{{ route('admin.feedback.destroy', ['feedback' => $feedback]) }}"
                                         method="post" class="d-inline">
@@ -57,6 +58,7 @@
                                         <button type="button" class="btn btn-danger confirm-delete"><i
                                                 class="bi bi-trash"></i></button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

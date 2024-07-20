@@ -62,7 +62,7 @@
                         </form>
                     </li>
 
-                    @if (Auth::user()->is_admin)
+                    @if (Auth::user()->is_admin() || Auth::user()->is_kasir())
                         <li class="nav-item ps-2">
                             <a class="nav-link btn btn-warning text-black" href="{{ route('admin.index') }}">Dashboard</a>
                         </li>

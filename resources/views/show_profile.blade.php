@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label>Role</label>
                                     <input type="role" class="form-control"
-                                        value="{{ $user->is_admin ? 'Admin' : 'Member' }}" disabled>
+                                        value="{{ $user->is_admin() ? 'Admin' : 'Member' }}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>

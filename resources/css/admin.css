@@ -56,3 +56,6 @@ body {
     width: 1000px;
     background: rgb(202, 220, 220);
 }
+.fc-event-title {
+    cursor: pointer !important;
+}

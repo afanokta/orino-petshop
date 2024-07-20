@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Grooming;
+use App\Models\GroomingSchedule;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -35,9 +36,7 @@ class GroomingFactory extends Factory
             'pet_age' => fake()->numberBetween('3', '1000'),
             'sinyalement' => 'kuping hitam',
             'equipment' => fake()->randomElement(['sisir', 'mainan', 'bola', 'selimut']),
-            'date' => $date,
-            // 'date' => "2024-03-20",
-            'session' => fake()->randomElement(['09:00', '10:00', '11:00', '12:00', '13:00', '14:00']),
+            'grooming_schedule_id' => GroomingSchedule::all()->random(),
             'note' => 'dijaaga baik2',
             'created_at' => $created_at,
             'updated_at' => $created_at,

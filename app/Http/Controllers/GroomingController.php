@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grooming;
+use App\Models\GroomingSchedule;
 use App\Models\Order;
 use App\Models\Product;
 use Carbon\Carbon;
@@ -20,10 +21,23 @@ class GroomingController extends Controller
 
         $date_start = Carbon::now()->addDays(1);
         $date_end = Carbon::now()->addMonths(1);
+        $schedules_raw = GroomingSchedule::whereBetween('date', [$date_start, $date_end])->with('grooming')->get();
+        $schedules = [];
+        foreach ($schedules_raw as $key => $schedule) {
+            $schedules[$key]['extendedProps']['grooming_schedule_id'] = $schedule->id;
+            $schedules[$key]['extendedProps']['available'] = $schedule->grooming ? false : true;
+            $schedules[$key]['start'] = $schedule->date . ' ' . $schedule->session->format('H:i');
+            $schedules[$key]['end'] = $schedule->date . ' ' . $schedule->session_end->format('H:i');
+            $schedules[$key]['borderColor'] = $schedule->grooming ? "#dc3545" : "#28a745";
+            $schedules[$key]['backgroundColor'] = $schedule->grooming ? "#dc3545" : "#28a745";
+            $schedules[$key]['textColor'] = $schedule->grooming ? "#dc3545" : "#28a745";
+            $schedules[$key]['title'] = $schedule->session->format('H:i');
+        }
         $data = [
             'date_start' => $date_start,
             'date_end' => $date_end,
             'services' => $services,
+            'schedules' => $schedules,
         ];
 
         return view('grooming_page', $data);
@@ -43,7 +57,7 @@ class GroomingController extends Controller
             $data['end_date'] = $request->end_date;
             $data['start_date'] = $request->start_date;
         }
-        $groomings = $groomings->orderBy('date', 'desc')->orderBy('session', 'asc')->paginate(10);
+        $groomings = $groomings->paginate(10);
         $data['groomings'] = $groomings;
 
         return view('dashboard.grooming.index', $data);
@@ -102,8 +116,10 @@ class GroomingController extends Controller
     public function edit(Grooming $grooming)
     {
         $products = Product::where('name', 'LIKE', '%grooming%')->get();
+        $schedules = GroomingSchedule::doesntHave('grooming')->get();
+        // dd($schedules);
 
-        return view('dashboard.grooming.edit', compact('grooming', 'products'));
+        return view('dashboard.grooming.edit', compact('grooming', 'products', 'schedules'));
     }
 
     public function update(Request $request, Grooming $grooming)
@@ -118,4 +134,5 @@ class GroomingController extends Controller
 
         return redirect()->route('admin.grooming.index')->with('success', 'Berhasil Update Data');
     }
+
 }

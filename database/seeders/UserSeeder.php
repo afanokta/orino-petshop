@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enum\UserRoleEnum;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,14 +16,31 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'id' => 1,
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
-            'is_admin' => true,
+            'role' => UserRoleEnum::ADMIN->value,
         ]);
 
-        User::factory(10)->create();
+        User::create([
+            'name' => 'Kasir',
+            'email' => 'kasir@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => UserRoleEnum::KASIR->value,
+        ]);
+
+        User::create([
+            'name' => 'User',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => UserRoleEnum::USER->value,
+        ]);
+
+        User::factory(10)
+        ->state(new Sequence(
+            ['role' => UserRoleEnum::KASIR->value],
+            ['role' => UserRoleEnum::USER->value]
+        ))->create();
 
     }
 }

@@ -5,8 +5,8 @@
             <div class="bg-white p-4 rounded">
                 <div class="" id="calendar"></div>
             </div>
-            <h3 class="fw-bold mt-3">Jadwal Tersedia</h3>
-            <div class="sesi mt-3 d-lg-block d-flex justify-content-center">
+            {{-- <h3 class="fw-bold mt-3">Jadwal Tersedia</h3> --}}
+            {{-- <div class="sesi mt-3 d-lg-block d-flex justify-content-center">
                 <div class="row my-3">
                     <div class="col d-flex flex-lg-row flex-column justify-content-evenly gap-3">
                         <div class="form-check form-check-inline">
@@ -39,10 +39,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center pt-5" id="formSection" style="scroll-margin-top: 45px;">
         <div class="col-lg-8 col-12">
             <div class="card fw-bold text-gray">
                 <div class="card-header" style="background-color: #FFEFB0">{{ __('Form Grooming') }}
@@ -52,6 +52,18 @@
                     <form id="groomingForm" action="{{ route('grooming.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="form-group mb-3">
+                            <label for="jadwalTanggal">Tanggal Pemesanan</label>
+                            <input type="date" id="jadwalTanggal" class="form-control" name="date" required
+                                readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="sesi-jadwal">Sesi Pemesanan</label>
+                            <input type="time" class="form-control" id="sesi-jadwal" name="session" required
+                                readonly>
+                        </div>
+                            <input type="number" class="form-control" id="sesi-jadwal" name="grooming_schedule_id" required
+                                readonly hidden>
                         <div class="form-group">
                             <label>Nama Pemilik</label>
                             <input type="text" name="owner" placeholder="Nama" class="form-control" required><br>
@@ -99,17 +111,6 @@
                             <input type="text" name="equipment" placeholder="Perlengkapan" class="form-control"
                                 required><br>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="jadwalTanggal">Tanggal Pemesanan</label>
-                            <input type="date" id="jadwalTanggal" class="form-control" name="date" required
-                                readonly>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="sesi-jadwal">Sesi Pemesanan</label>
-                            <input type="time" class="form-control" id="sesi-jadwal" name="session" required
-                                readonly>
-                        </div>
-
                         <div class="form-group">
                             <label>Jenis Grooming</label>
                             <select name="product_id" class="form-select" required>
@@ -118,12 +119,6 @@
                                     <option value="{{ $s->id }}"> {{ $s->name }} - Rp.{{ $s->price}}</option>
                                 @endforeach
                             </select><br>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Catatan Groomer</label>
-                            <input type="text" name="note" placeholder="Catatan Untuk Groomer"
-                                class="form-control" required><br>
                         </div>
                         <div class="container text-center">
                             <h2 class="fw-bold mt-3">PERSETUJUAN LAYANAN GROOMING</h2>

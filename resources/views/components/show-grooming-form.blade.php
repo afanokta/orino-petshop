@@ -58,20 +58,14 @@
 
         <div class="form-group mb-3">
             <label for="jadwalTanggal">Tanggal Pemesanan</label>
-            <input readonly value="{{ $order->service->date }}" type="date" id="jadwalTanggal" class="form-control"
+            <input readonly value="{{ $order->service->schedule->date }}" type="date" id="jadwalTanggal" class="form-control"
                 name="date" required readonly>
         </div>
 
         <div class="form-group mb-3">
             <label for="sesi-jadwal">Sesi Pemesanan</label>
-            <input readonly value="{{ $order->service->session->format('H:i') }}" type="time" class="form-control"
+            <input readonly value="{{ $order->service->schedule->session->format('H:i') }}" type="time" class="form-control"
                 id="sesi-jadwal" name="session" required readonly>
-        </div>
-
-        <div class="form-group mb-3">
-            <label>Catatan</label>
-            <input type="text" name="pet_food" placeholder="Merk Makanan" class="form-control"
-                value="{{ $order->service->note }}" readonly />
         </div>
     </div>
 

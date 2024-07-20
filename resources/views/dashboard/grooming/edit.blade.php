@@ -2,15 +2,15 @@
     @slot('content')
         <div class="row my-2">
             <div class="col">
-                <a href="{{ route('admin.order.show', ['order' => $grooming->order->id]) }}" class="btn btn-primary">Lihat 
+                <a href="{{ route('admin.order.show', ['order' => $grooming->order->id]) }}" class="btn btn-primary">Lihat
                     Order</a>
                 @if ($grooming->order->confirmation == 'waiting')
-                    <a id="accept-grooming" href="{{ route('admin.order.accept', ['order' => $grooming->order->id]) }}" 
+                    <a id="accept-grooming" href="{{ route('admin.order.accept', ['order' => $grooming->order->id]) }}"
                         class="btn btn-success confirm-accept-grooming">Terima Pesanan</a>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject">Tolak Pesanan</button>
                 @endif
             </div>
-                       
+
         </div>
         <form action="{{ route('admin.grooming.update', ['grooming' => $grooming]) }}" method="POST">
             @csrf
@@ -27,25 +27,15 @@
                         </select>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-12">
+                        <div class=" col-12">
                             <div class="form-group mb-2">
-                                <label>Tanggal Grooming</label>
-                                <input type="date" name="date" value="{{ $grooming->date }}" class="form-control"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <label>Sesi</label>
-                                <select name="session" class="form-control form-select" required>
-                                    <option value="{{ $grooming->session->format('H:i') }}" selected>
-                                        {{ $grooming->session->format('H:i') }}</option>
-                                    <option value="09:00">09:00</option>
-                                    <option value="10:00">10:00</option>
-                                    <option value="11:00">11:00</option>
-                                    <option value="12:00">12:00</option>
-                                    <option value="13:00">13:00</option>
-                                    <option value="14:00">14:00</option>
+                                <label>Waktu Grooming</label>
+                                <select name="grooming_schedule_id" class="form-control form-select" required>
+                                    <option value="{{ $grooming->schedule->id }}" selected>
+                                        {{$grooming->schedule->date. ' ' . $grooming->schedule->session->format('H:i') }}</option>
+                                        @foreach ($schedules as $schedule)
+                                            <option value={{ $schedule->id }}>{{$schedule->date. ' ' . $schedule->session->format('H:i') }}</option>
+                                        @endforeach
                                 </select>
                             </div>
                         </div>

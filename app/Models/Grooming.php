@@ -19,14 +19,10 @@ class Grooming extends Model
         'pet_age',
         'sinyalement',
         'equipment',
-        'date',
-        'session',
+        'grooming_schedule_id',
         'note',
     ];
 
-    protected $casts = [
-        'session' => 'datetime:H:i',
-    ];
 
     public function user()
     {
@@ -41,5 +37,9 @@ class Grooming extends Model
     public function order()
     {
         return $this->morphOne(Order::class, 'service');
+    }
+
+    public function schedule() {
+        return $this->belongsTo(GroomingSchedule::class, 'grooming_schedule_id');
     }
 }

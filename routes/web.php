@@ -3,10 +3,13 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GroomingController;
+use App\Http\Controllers\GroomingScheduleController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PetHotelController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\ProfileController;
+use App\Models\GroomingSchedule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -33,16 +36,25 @@ Auth::routes();
 // Product
 Route::post('feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('auth','dashboard')->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
+        Route::put('/order/{order}', [OrderController::class, 'update'])->name('admin.order.update');
         Route::post('/order/{order}/confirm', [OrderController::class, 'confirm_payment'])->name('admin.order.confirm');
         Route::post('/order/{order}/rejectPayment', [OrderController::class, 'reject_payment'])->name('admin.order.rejectPayment');
         Route::get('/order/{order}/accept', [OrderController::class, 'acceptOrder'])->name('admin.order.accept');
         Route::post('/order/{order}/reject', [OrderController::class, 'rejectOrder'])->name('admin.order.reject');
 
         Route::resource('order', OrderController::class, ['as' => 'admin']);
+        Route::prefix('grooming')->group(function() {
+            Route::resource('schedule', GroomingScheduleController::class, ['as' => 'admin.grooming']);
+            // Route::get('/grooming/tambah-jadwal', [GroomingController::class, 'tambah_jadwal'])->name('grooming.schedule.index');
+        });
+        Route::prefix('pethotel')->group(function() {
+            Route::get('schedule', [PetHotelController::class, 'tambah_pet_hotel'])->name('admin.pethotel.schedule.index');
+            // Route::get('/grooming/tambah-jadwal', [GroomingController::class, 'tambah_jadwal'])->name('grooming.schedule.index');
+        });
         Route::resource('grooming', GroomingController::class, ['as' => 'admin'])->except('store');
         Route::resource('pethotel', PetHotelController::class, ['as' => 'admin'])->except('store');
         Route::resource('feedback', FeedbackController::class, ['as' => 'admin']);
@@ -68,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order', [OrderController::class, 'index_order'])->name('index_order');
     Route::get('/order/{order}', [OrderController::class, 'show_order'])->name('show_order');
     Route::post('/order/{order}/pay', [OrderController::class, 'submit_payment_receipt'])->name('order.pay');
+    Route::post('/productReview', [ProductReviewController::class, 'store'])->name('productReview.store');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'show_profile'])->name('show_profile');

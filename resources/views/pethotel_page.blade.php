@@ -43,16 +43,13 @@
                         <div class="col-6 position-relative d-flex justify-content-center"
                             style="left: 50%; transform: translateX(-50%);">
                             <div class="ph-image w-md-100 w-75">
-                                <img src="{{ asset('media/ph-3.svg') }}" alt="Ph Image 3" class="img-fluid">
+                                <img src="{{ asset('media/pethotel.jpg') }}" alt="Ph Image 3" class="img-fluid border-5 border-black rounded-3">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
-
         <section id="fasilitas-ph" class="fasilitas-ph-container container">
             <div style="text-align: center;">
                 <h1 class="fw-bold mb-3">
@@ -60,7 +57,7 @@
                 </h1>
                 <div id="garis-bawah" class="garisbawah mb-4"></div>
                 <br>
-                <h4>Hanya dengan<strong class="fw-bold text-warning"> Rp30.000 
+                <h4>Hanya dengan<strong class="fw-bold text-warning"> Rp30.000
                     </strong> per hari nya, Kami menawarkan penginapan khusus untuk hewan peliharaan Anda dengan
                     perhatian dan kenyamanan maksimal. Berikut persayaratan dalam layanan Kami:</h4>
 
@@ -109,11 +106,9 @@
                 </h1>
                 <div id="garis-bawah" class="garisbawah mb-4"></div>
                 <br>
-                <h4 class="text-center mb-4 justify-content-center fw-bold ">Untuk dapat memesan layanan pet hotel dapat
-                    mengisi
-                    form di bawah ini.</h4>
+                <h4 class="text-center mb-4 justify-content-center fw-bold ">List Jadwal PetHotel</h4>
             </div>
-            <x-form-pet-hotel />
+            <div class="my-3" id="calendar"></div>
             <br><br>
         </section>
     @endslot
@@ -149,7 +144,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 var calendarEl = document.getElementById('calendar');
                 var invalidDates = {!! json_encode($invalidDates) !!}
-                var events = [];
+                var events = {!! Js::from($schedules) !!};
                 invalidDates.forEach(function(element) {
                     events.push({
                         start: element,
@@ -159,35 +154,35 @@
                     })
                 })
                 var calendar = new FullCalendar.Calendar(calendarEl, {
-                    selectable: true,
+                    // selectable: true,
                     headerToolbar: {
                         left: 'prev,next today',
                         center: 'title',
                     },
                     events: events,
-                    select: function(selectInfo) {
-                        $('input[name=start_date]').val(selectInfo.startStr)
-                        var end_date = new Date(selectInfo.endStr)
-                        var end_date_str = new Date(end_date.setDate(end_date.getDate() - 1))
-                            .toLocaleDateString('en-CA')
-                        $('input[name=end_date]').val(end_date_str)
+                    // select: function(selectInfo) {
+                    //     $('input[name=start_date]').val(selectInfo.startStr)
+                    //     var end_date = new Date(selectInfo.endStr)
+                    //     var end_date_str = new Date(end_date.setDate(end_date.getDate() - 1))
+                    //         .toLocaleDateString('en-CA')
+                    //     $('input[name=end_date]').val(end_date_str)
 
-                        invalidDates.forEach((element) => {
-                            invalid = new Date(element).getTime()
-                            start_date = new Date(selectInfo.startStr).getTime()
-                            end_date = new Date(selectInfo.endStr).getTime()
-                            if (start_date <= invalid && end_date >= invalid) {
-                                Swal.fire({
-                                    title: 'Hari yang anda pilih sudah penuh!',
-                                    text: 'Silahkan Memilih Hari Lain',
-                                    icon: 'error',
-                                    confirmButtonText: 'Tutup'
-                                })
-                                $('input[name=start_date]').val("")
-                                $('input[name=end_date]').val("")
-                            }
-                        })
-                    },
+                    //     invalidDates.forEach((element) => {
+                    //         invalid = new Date(element).getTime()
+                    //         start_date = new Date(selectInfo.startStr).getTime()
+                    //         end_date = new Date(selectInfo.endStr).getTime()
+                    //         if (start_date <= invalid && end_date >= invalid) {
+                    //             Swal.fire({
+                    //                 title: 'Hari yang anda pilih sudah penuh!',
+                    //                 text: 'Silahkan Memilih Hari Lain',
+                    //                 icon: 'error',
+                    //                 confirmButtonText: 'Tutup'
+                    //             })
+                    //             $('input[name=start_date]').val("")
+                    //             $('input[name=end_date]').val("")
+                    //         }
+                    //     })
+                    // },
                     validRange: {
                         start: Date.parse('{{ $date_start }}'),
                         end: Date.parse('{{ $date_end }}')

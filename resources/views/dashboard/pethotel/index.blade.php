@@ -7,7 +7,7 @@
             <form action="{{ route('admin.pethotel.index') }}" method="get">
                 <div class="row pb-3">
                     <div class="col-lg-3 col-12 pt-4">
-                        <a href="{{ route('pethotel_page') }}" class="btn btn-success">Tambah Jadwal Pet Hotel</a>
+                        <a href="{{ route('admin.pethotel.schedule.index') }}" class="btn btn-success">Tambah Jadwal Pet Hotel</a>
                     </div>
                     <div class="col-lg-3 col-12">
                         <label>Start Date:</label>
@@ -62,7 +62,7 @@
                                             @case('waiting')
                                                 <span class="badge bg-warning">Menunggu Konfirmasi</span>
                                             @break
-                                            
+
                                             @case('reject_form')
                                                 <span class="badge bg-danger">Form Ditolak</span>
                                             @break
@@ -78,6 +78,7 @@
                                         class="btn btn-success"><i class="bi bi-eye"></i></a>
                                     <a href="{{ route('admin.pethotel.edit', ['pethotel' => $ph]) }}"
                                         class="btn btn-warning text-white"><i class="bi bi-pencil"></i></a>
+                                    @if (Auth::user()->is_admin())
                                     <form id="delete-form{{ $ph->id }}"
                                         action="{{ route('admin.pethotel.destroy', ['pethotel' => $ph]) }}" method="post"
                                         class="d-inline">
@@ -86,6 +87,7 @@
                                         <button type="button" class="btn btn-danger confirm-delete"><i
                                                 class="bi bi-trash"></i></button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
