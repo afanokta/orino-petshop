@@ -23,6 +23,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function productReview()
+    {
+        return $this->hasOne(ProductReview::class);
+    }
+
     public function service()
     {
         return $this->morphTo();

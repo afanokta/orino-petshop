@@ -15,6 +15,9 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js'></script>
+
     <!-- Scripts -->
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/admin.css'])
@@ -82,7 +85,7 @@
                 }
             });
         });
-        
+
         $('.confirm-accept-pethotel').on('click', function(e) {
             e.preventDefault();
             var acceptUrl = $(this).attr('href');
@@ -101,7 +104,7 @@
                 }
             });
         });
-        
+
 </script>
 
 </html>

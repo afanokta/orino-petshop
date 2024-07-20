@@ -6,12 +6,14 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
     public function show(Request $request, Order $order)
     {
+        $order = $order->load('productReview');
         return view('dashboard.order.show', compact('order'));
     }
 
@@ -36,15 +38,15 @@ class OrderController extends Controller
         })->orderBy('created_at', 'desc')->get();
         $groomingOrders = $user->orders()->whereHas('service', function ($query) {
             $query->where('service_type', 'LIKE', '%Grooming%');
-        })->orderBy('created_at', 'desc')->get();
-
+        })->orderBy('created_at', 'desc')->with('service')->get();
+        // dd($groomingOrders[0]->service->schedule->session);
         return view('index_order', compact('groomingOrders', 'pethotelOrders'));
     }
 
     public function show_order(Order $order)
     {
         $user = Auth::user();
-        $is_admin = $user->is_admin;
+        $is_admin = $user->is_admin();
 
         if ($is_admin || $user->id == $user->id) {
             return view('show_order', compact('order'));
@@ -133,6 +135,22 @@ class OrderController extends Controller
             ->get();
 
         return view('order_data', compact('orders'));
+    }
+
+    public function update(Request $req, Order $order){
+        try {
+            if ($req->hasFile('payment_receipt_img')) {
+                $file = $req->file('payment_receipt_img');
+
+                $path = Storage::disk('public')->put('payment_receipts', $file);
+                $req->merge(['payment_receipt' => $path]);
+            }
+            // dd($req->all());
+            $order->update($req->all());
+            return redirect()->back()->with('success', 'Pesanan Berhasil Diubah');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('errors', 'Gagal Update Pesanan');
+        }
     }
 
     public function acceptOrder(Order $order)

@@ -12,17 +12,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-7 col-12">
                 <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="form-group mb-2">
-                            <label>Tanggal Grooming</label>
-                            <input type="date" name="start_date" value="{{ $grooming->date }}" class="form-control"
-                                readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
+                    <div class="col-12">
                         <div class="form-group mb-2">
                             <label>Sesi</label>
-                            <input type="time" name="end_date" value="{{ $grooming->session->format('H:i') }}"
+                            <input type="text" name="end_date" value="{{ $grooming->schedule->date . ' ' . $grooming->schedule->session->format('H:i') }}"
                                 class="form-control" readonly>
                         </div>
                     </div>

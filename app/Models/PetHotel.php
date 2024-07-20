@@ -26,6 +26,10 @@ class PetHotel extends Model
         'end_date',
     ];
 
+    protected $casts = [
+        'vaccine' => 'bool'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

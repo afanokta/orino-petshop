@@ -67,12 +67,15 @@
                         <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
                         <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
                         <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="5"></button>
                     </div>
 
                     <!-- The slideshow/carousel -->
                     <div class="carousel-inner">
                         <div class="carousel-item active" style="background-color: transparent !important">
-                            <img src="{{ asset('media/kami-1.svg') }}" alt="syarat-1" class="d-inline w-50">
+                            <img src="{{ asset('media/cat-food.jpg') }}" alt="syarat-1" class="d-inline w-50">
                             <div class="fw-bold text-secondary mt-2">Tersedia Makanan Kucing dan Anjing</div>
                         </div>
                         <div class="carousel-item pulse" style="background-color: transparent !important">
@@ -80,8 +83,20 @@
                             <div class="fw-bold text-secondary mt-2">Tersedia Layanan Grooming Kucing</div>
                         </div>
                         <div class="carousel-item pulse" style="background-color: transparent !important">
-                            <img src="{{ asset('media/kami-3.svg') }}" alt="syarat-3" class="d-inline w-50">
+                            <img src="{{ asset('media/pethotel.jpg') }}" alt="syarat-3" class="d-inline w-50">
                             <div class="fw-bold text-secondary mt-2">Tersedia Layanan Pet Hotel Kucing</div>
+                        </div>
+                        <div class="carousel-item pulse" style="background-color: transparent !important">
+                            <img src="{{ asset('media/medicine.jpg') }}" alt="syarat-4" class="d-inline w-50">
+                            <div class="fw-bold text-secondary mt-2">Tersedia Keperluan Kesehatan Hewan</div>
+                        </div>
+                        <div class="carousel-item pulse" style="background-color: transparent !important">
+                            <img src="{{ asset('media/mangkok-makan.jpg') }}" alt="syarat-5" class="d-inline w-50">
+                            <div class="fw-bold text-secondary mt-2">Tersedia Keperluan Peralatan Hewan Peliharaan</div>
+                        </div>
+                        <div class="carousel-item pulse" style="background-color: transparent !important">
+                            <img src="{{ asset('media/kandang.jpg') }}" alt="syarat-5" class="d-inline w-50">
+                            <div class="fw-bold text-secondary mt-2">Tersedia Kandang Hewan Peliharaan</div>
                         </div>
                     </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\PetHotel;
 use App\Models\Product;
+use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -50,7 +51,21 @@ class PetHotelController extends Controller
                 $invalidDates[] = $value;
             }
         }
+        $petHotels = PetHotel::whereHas('order', function ($q) {
+            return $q->whereIn('confirmation', ['waiting', 'confirm']);
+        })->get();
+        $schedules = [];
+        foreach ($petHotels as $key => $petHotel) {
+            // $schedules[$key]['extendedProps']['grooming_schedule_id'] = $schedule->id;
+            // $schedules[$key]['extendedProps']['available'] = $schedule->grooming ? false : true;
+            $schedules[$key]['start'] = $petHotel->start_date;
+            $schedules[$key]['backgroundColor'] = "#dc3545";
+            $schedules[$key]['end'] = $petHotel->end_date;
+            $schedules[$key]['title'] = 'Terisi';
+        }
+
         $data = [
+            'schedules' => $schedules,
             'date_start' => $date_start,
             'date_end' => $date_end,
             'invalidDates' => $invalidDates,
@@ -59,17 +74,23 @@ class PetHotelController extends Controller
         return view('pethotel_page', $data);
     }
 
+    public function create(Request $req) {
+        $start_date = $req->start_date;
+        $end_date = $req->end_date;
+        return view('dashboard.pethotel.create', compact('start_date', 'end_date'));
+    }
+
     public function store(Request $request)
     {
-        $vaccine = $request->file('vaccine_image');
-        $medcheck = $request->file('medcheck_image');
+        // $vaccine = $request->file('vaccine_image');
         try {
-            $vaccine_path = Storage::disk('public')->put('vaccines', $vaccine);
-            $medcheck_path = Storage::disk('public')->put('medchecks', $medcheck);
+            // $vaccine_path = Storage::disk('public')->put('vaccines', $vaccine);
+            $user = User::where('email', $request->email)->first();
+            if(!$user) {
+                return redirect()->back()->with('error', "User dengan email {$request->email} tidak ditemukan!");
+            }
             $request->merge([
-                'vaccine' => $vaccine_path,
-                'medcheck' => $medcheck_path,
-                'user_id' => Auth::user()->id,
+                'user_id' => $user->id,
                 'product_id' => Product::where('name', 'LIKE', '%hotel')->first()->id,
             ]);
             $petHotel = PetHotel::create($request->all());
@@ -78,11 +99,11 @@ class PetHotelController extends Controller
             $order = new Order(['user_id' => $request['user_id'], 'price' => $price]);
             $petHotel->order()->save($order);
 
-            return redirect()->route('index_order')->with('success', 'Berhasil Memesan PetHotel, Silahkan Melakukan Pembayaran pada Halaman Order');
+            return redirect()->route('admin.pethotel.schedule.index')->with('success', 'Berhasil Memesan PetHotel, Silahkan Melakukan Pembayaran pada Halaman Order');
         } catch (\Throwable $th) {
             dd($th->getMessage());
 
-            return redirect()->back()->with('errors', 'Gagal Memesan Pethotel'.$th->getMessage());
+            return redirect()->back()->with('errors', 'Gagal Memesan Pethotel' . $th->getMessage());
         }
     }
 
@@ -117,6 +138,7 @@ class PetHotelController extends Controller
         }
 
         try {
+            // dd($request->all());
             $countDays = (int) date_diff(date_create($request['start_date']), date_create($request['end_date']))->format('%a');
             $price = $pethotel->product->price * $countDays;
             $pethotel->order->update(['price' => $price]);
@@ -127,4 +149,50 @@ class PetHotelController extends Controller
 
         return redirect()->route('admin.pethotel.index')->with('success', 'Berhasil Update Data');
     }
+
+    public function tambah_pet_hotel()
+    {
+        $date_start = Carbon::now()->addDays(1);
+        $date_end = Carbon::now()->addMonths(1);
+        $period = CarbonPeriod::create($date_start, $date_end);
+        $dates = [];
+        foreach ($period as $key => $value) {
+            $dates[] = $value->format('Y-m-d');
+        }
+
+        $invalidDates = [];
+        foreach ($dates as $key => $value) {
+            $count = PetHotel::whereHas('order', function ($q) {
+                return $q->whereIn('confirmation', ['waiting', 'confirm']);
+            })
+                ->where('start_date', '<=', $value)
+                ->where('end_date', '>=', $value)->count();
+            if ($count >= 6) {
+                $invalidDates[] = $value;
+            }
+        }
+        $petHotels = PetHotel::whereHas('order', function ($q) {
+            return $q->whereIn('confirmation', ['waiting', 'confirm']);
+        })->get();
+        $schedules = [];
+        foreach ($petHotels as $key => $petHotel) {
+            // $schedules[$key]['extendedProps']['grooming_schedule_id'] = $schedule->id;
+            // $schedules[$key]['extendedProps']['available'] = $schedule->grooming ? false : true;
+            $schedules[$key]['start'] = $petHotel->start_date;
+            $schedules[$key]['backgroundColor'] = "#dc3545";
+            $schedules[$key]['end'] = $petHotel->end_date;
+            $schedules[$key]['title'] = 'Terisi';
+            $schedules[$key]['url'] = route('admin.pethotel.show', ['pethotel' => $petHotel->id]);
+        }
+
+        $data = [
+            'schedules' => $schedules,
+            'date_start' => $date_start,
+            'date_end' => $date_end,
+            'invalidDates' => $invalidDates,
+        ];
+
+        return view('dashboard.pethotel.tambah-jadwal', $data);
+    }
+
 }

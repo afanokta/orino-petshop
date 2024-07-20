@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\GroomingSchedule;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -16,6 +17,7 @@ return new class() extends Migration {
             $table->id();
             $table->foreignIdFor(User::class)->constrained('users')->cascadeOnDelete();
             $table->foreignIdFor(Product::class)->constrained('products')->cascadeOnDelete();
+            $table->foreignIdFor(GroomingSchedule::class)->constrained('grooming_schedules')->cascadeOnDelete();
             $table->string('owner');
             $table->string('address');
             $table->string('phone_number');
@@ -24,9 +26,7 @@ return new class() extends Migration {
             $table->integer('pet_age');
             $table->string('sinyalement');
             $table->string('equipment');
-            $table->date('date');
-            $table->time('session');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

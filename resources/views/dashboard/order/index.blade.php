@@ -64,7 +64,7 @@
                                         @case('waiting')
                                             <span class="badge bg-warning">Menunggu Konfirmasi</span>
                                         @break
-                                        
+
                                         @case('reject_form')
                                             <span class="badge bg-danger">Form Ditolak</span>
                                         @break
@@ -79,6 +79,7 @@
                                 <td class="">
                                     <a href="{{ route('admin.order.show', ['order' => $order->id]) }}"
                                         class="btn btn-success"><i class="bi bi-eye"></i></a>
+                                    @if (Auth::user()->is_admin())
                                     <form id="delete-form{{ $order->id }}"
                                         action="{{ route('admin.order.destroy', ['order' => $order]) }}" method="post"
                                         class="d-inline">
@@ -87,6 +88,7 @@
                                         <button type="button" class="btn btn-danger confirm-delete"><i
                                                 class="bi bi-trash"></i></button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

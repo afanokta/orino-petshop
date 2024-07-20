@@ -29,10 +29,12 @@
             <input readonly value="{{ $order->service->pet_gender }}" type="text" name="pet_gender"
                 placeholder="Nama Hewan Peliharaan" class="form-control" required>
         </div>
-
-        <div class="div">
-            <p>Sertifikat Vaksin</p>
-            <img src="{{ Storage::url($order->service->vaccine) }}" alt="" class="img-fluid">
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="1"
+                {{ $order->service->vaccine ? 'checked' : '' }} id="flexCheckIndeterminate" name="vaccine" disabled>
+            <label class="form-check-label" for="flexCheckIndeterminate">
+                Ada Sertifikat?
+            </label>
         </div>
     </div>
     <div class="col">
@@ -47,28 +49,23 @@
             <input readonly value="{{ $order->service->start_date }}" type="date" id="jadwalTanggal"
                 class="form-control" name="start_date" required readonly>
         </div>
-        
+
         <div class="form-group mb-3">
             <label for="sesi-jadwal">Tanggal Selesai</label>
             <input readonly value="{{ $order->service->end_date }}" type="date" class="form-control" id="sesi-jadwal"
                 name="end_date" required readonly>
         </div>
 
-        <div class="form-group mb-3">
+        {{-- <div class="form-group mb-3">
             <label>Catatan</label>
             <input type="text" name="pet_food" placeholder="Merk Makanan" class="form-control"
                 value="{{ $order->service->note }}" readonly />
-        </div>
-        
+        </div> --}}
+
         <div class="form-group mb-3">
             <label>Harga</label>
             <input readonly value="Rp.{{ $order->price }}" type="text" name="price"
                placeholder="Price" class="form-control" required>
-        </div>
-
-        <div class="div">
-            <p>Medical Check</p>
-            <img src="{{ Storage::url($order->service->medcheck) }}" alt="" class="img-fluid">
         </div>
     </div>
 </div>

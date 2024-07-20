@@ -7,7 +7,7 @@
             <form action="{{ route('admin.grooming.index') }}" method="get">
                 <div class="row pb-3">
                     <div class="col-lg-3 col-12 pt-4">
-                        <a href="{{ route('grooming_page') }}" class="btn btn-success">Tambah Jadwal Grooming</a>
+                        <a href="{{ route('admin.grooming.schedule.index') }}" class="btn btn-success">Tambah Jadwal Grooming</a>
                     </div>
                     <div class="col-lg-3 col-12">
                         <label>Start Date:</label>
@@ -64,7 +64,7 @@
                                             @case('waiting')
                                                 <span class="badge bg-warning">Menunggu Konfirmasi</span>
                                             @break
-                                            
+
                                             @case('reject_form')
                                                 <span class="badge bg-danger">Form Ditolak</span>
                                             @break
@@ -73,21 +73,23 @@
                                                 <span class="badge bg-danger">Ditolak</span>
                                         @endswitch
                                 </td>
-                                <td>{{ $grooming->date }}</td>
-                                <td>{{ $grooming->session->format('H:i') }}</td>
+                                <td>{{ $grooming->schedule->date }}</td>
+                                <td>{{ $grooming->schedule->session->format('H:i') }}</td>
                                 <td class="">
                                     <a href="{{ route('admin.grooming.show', ['grooming' => $grooming->id]) }}"
                                         class="btn btn-success"><i class="bi bi-eye"></i></a>
                                     <a href="{{ route('admin.grooming.edit', ['grooming' => $grooming]) }}"
                                         class="btn btn-warning text-white"><i class="bi bi-pencil"></i></a>
-                                    <form id="delete-form{{ $grooming->id }}"
-                                        action="{{ route('admin.grooming.destroy', ['grooming' => $grooming]) }}"
-                                        method="post" class="d-inline">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="button" class="btn btn-danger confirm-delete"><i
+                                        @if (Auth::user()->is_admin())
+                                            <form id="delete-form{{ $grooming->id }}"
+                                                action="{{ route('admin.grooming.destroy', ['grooming' => $grooming]) }}"
+                                            method="post" class="d-inline">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="button" class="btn btn-danger confirm-delete"><i
                                                 class="bi bi-trash"></i></button>
-                                    </form>
+                                            </form>
+                                        @endif
                                 </td>
                             </tr>
                         @endforeach

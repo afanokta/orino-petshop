@@ -24,9 +24,8 @@ return new class extends Migration
             $table->string('pet_gender');
             $table->integer('pet_age');
             $table->string('pet_food');
-            $table->string('note');
-            $table->string('vaccine');
-            $table->string('medcheck');
+            $table->text('note')->nullable();
+            $table->boolean('vaccine')->default(false);
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
