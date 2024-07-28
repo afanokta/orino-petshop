@@ -16,7 +16,7 @@
                             <img class="sosmed" src="{{ asset('media/maps-logo.svg') }}" alt="maps-logo"
                                 style="width: 40px; height:auto;">
                         </a>
-                        <p class="mb-0 ms-2 fw-bold">Gmaps</p>
+                        <p class="mb-0 ms-2 fw-bold text-decoration-none text-black">Gmaps</p>
                     </div>
 
                     <div class="col d-flex align-items-center" id="maps-icon">
@@ -24,7 +24,7 @@
                             <img class="sosmed" src="{{ asset('media/grabmart.svg') }}" alt="maps-logo"
                                 style="width: 40px; height:auto;">
                         </a>
-                        <p class="mb-0 ms-2 fw-bold">Grab Mart</p>
+                        <p class="mb-0 ms-2 fw-bold text-decoration-none text-black">Grab Mart</p>
                     </div>
 
                     <div class="col d-flex align-items-center" id="maps-icon">
@@ -32,7 +32,7 @@
                             <img class="sosmed" src="{{ asset('media/tokped.svg') }}" alt="maps-logo"
                                 style="width: 40px; height:auto;">
                         </a>
-                        <p class="mb-0 ms-2 fw-bold">Tokopedia</p>
+                        <p class="mb-0 ms-2 fw-bold text-decoration-none text-black">Tokopedia</p>
                     </div>
 
                     <div class="col d-flex align-items-center" id="orino-logo">
@@ -40,7 +40,7 @@
                             <img class="sosmed" src="{{ asset('media/ig-logo.svg') }}" alt="ig-logo"
                                 style="width: 40px; height:auto;">
                         </a>
-                        <p class="mb-0 ms-2 fw-bold">@orinopetshop</p>
+                        <p class="mb-0 ms-2 fw-bold text-decoration-none text-black">@orinopetshop</p>
                     </div>
 
                     <div class="col-auto mt-2 d-flex align-items-center" id="whatsapp-icon">
@@ -49,8 +49,8 @@
                                 style="width: 40px; height:auto;">
                         </a>
                         <div class="d-flex flex-column">
-                            <a class="mb-0 fw-bold" href="https://wa.me/6281230697181?text=Halo,%20Kak">
-                                +62-812-3069-7181</a>
+                            <a class="mb-0 fw-bold text-decoration-none text-black" href="https://wa.me/6281230697181?text=Halo,%20Kak">
+                                Whatsapp</a>
                         </div>
                     </div>
 
@@ -59,7 +59,7 @@
                             <img class="sosmed" src="{{ asset('media/shopee.svg') }}" alt="ig-logo"
                                 style="width: 40px; height:auto;">
                         </a>
-                        <p class="mb-0 ms-2 fw-bold">Shopee</p>
+                        <p class="mb-0 ms-2 fw-bold text-decoration-none text-black">Shopee</p>
                     </div>
 
                 </div>

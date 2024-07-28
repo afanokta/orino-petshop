@@ -18,6 +18,8 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="https://kit.fontawesome.com/8b7d045382.js" crossorigin="anonymous"></script> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
 </head>
@@ -29,7 +31,7 @@
         <main class="py-4">
             {{ $content }}
         </main>
-        @if (!in_array(Route::currentRouteName(), ['index_order', 'login', 'register', 'verify', 'password.confirm', 'password.email', 
+        @if (!in_array(Route::currentRouteName(), ['index_order', 'login', 'register', 'verify', 'password.confirm', 'password.email',
         'password.request', 'show_profile']))
             <x-footer />
         @endif

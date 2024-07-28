@@ -108,7 +108,9 @@
                 <br>
                 <h4 class="text-center mb-4 justify-content-center fw-bold ">List Jadwal PetHotel</h4>
             </div>
-            <div class="my-3" id="calendar"></div>
+            <div class="rounded-2 bg-white p-4 shadow">
+                <div class="my-3" id="calendar"></div>
+            </div>
             <br><br>
         </section>
     @endslot
