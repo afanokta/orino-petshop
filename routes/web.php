@@ -58,6 +58,8 @@ Route::middleware('auth','dashboard')->group(function () {
         Route::resource('grooming', GroomingController::class, ['as' => 'admin'])->except('store');
         Route::resource('pethotel', PetHotelController::class, ['as' => 'admin'])->except('store');
         Route::resource('feedback', FeedbackController::class, ['as' => 'admin']);
+        Route::get('order-by-user', [OrderController::class, 'order_by_user_page'])->name('admin.user_most_order');
+        Route::get('order-by-user/{user}', [OrderController::class, 'user_order'])->name('admin.user_most_order.show');
 
         Route::get('/filter', [OrderController::class, 'filter'])->name('filter');
     });

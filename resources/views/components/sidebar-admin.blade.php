@@ -49,6 +49,14 @@
                 Feedback
             </a>
         </li>
+        <li>
+            <a href="{{ route('admin.user_most_order') }}"
+                class="nav-link d-flex align-items-center gap-2 mt-2 text-white {{ Route::is('admin.user_most_order*') ? 'active' : '' }}"
+                aria-current="page">
+                @include('icons/order')
+                Order by User
+            </a>
+        </li>
     </ul>
     <hr>
     <div class="dropdown position-absolute bottom-0 mb-3">

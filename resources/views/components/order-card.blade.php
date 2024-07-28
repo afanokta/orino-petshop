@@ -105,16 +105,16 @@
                                 <td>Kualitas:</td>
                                 <td>
                                     <div class="rate">
-                                        <input type="radio" id="star5kualitas" name="kualitas" value="5" />
-                                        <label for="star5kualitas" title="text">5 stars</label>
-                                        <input type="radio" id="star4kualitas" name="kualitas" value="4" />
-                                        <label for="star4kualitas" title="text">4 stars</label>
-                                        <input type="radio" id="star3kualitas" name="kualitas" value="3" />
-                                        <label for="star3kualitas" title="text">3 stars</label>
-                                        <input type="radio" id="star2kualitas" name="kualitas" value="2" />
-                                        <label for="star2kualitas" title="text">2 stars</label>
-                                        <input type="radio" id="star1kualitas" name="kualitas" value="1" />
-                                        <label for="star1kualitas" title="text">1 star</label>
+                                        <input type="radio" id="star5kualitas{{ $order->id }}" name="kualitas" value="5" />
+                                        <label for="star5kualitas{{ $order->id }}" title="text">5 stars</label>
+                                        <input type="radio" id="star4kualitas{{ $order->id }}" name="kualitas" value="4" />
+                                        <label for="star4kualitas{{ $order->id }}" title="text">4 stars</label>
+                                        <input type="radio" id="star3kualitas{{ $order->id }}" name="kualitas" value="3" />
+                                        <label for="star3kualitas{{ $order->id }}" title="text">3 stars</label>
+                                        <input type="radio" id="star2kualitas{{ $order->id }}" name="kualitas" value="2" />
+                                        <label for="star2kualitas{{ $order->id }}" title="text">2 stars</label>
+                                        <input type="radio" id="star1kualitas{{ $order->id }}" name="kualitas" value="1" />
+                                        <label for="star1kualitas{{ $order->id }}" title="text">1 star</label>
                                     </div>
                                 </td>
                             </tr>
@@ -122,16 +122,16 @@
                                 <td>Pelayanan:</td>
                                 <td>
                                     <div class="rate">
-                                        <input type="radio" id="star5pelayanan" name="pelayanan" value="5" />
-                                        <label for="star5pelayanan" title="text">5 stars</label>
-                                        <input type="radio" id="star4pelayanan" name="pelayanan" value="4" />
-                                        <label for="star4pelayanan" title="text">4 stars</label>
-                                        <input type="radio" id="star3pelayanan" name="pelayanan" value="3" />
-                                        <label for="star3pelayanan" title="text">3 stars</label>
-                                        <input type="radio" id="star2pelayanan" name="pelayanan" value="2" />
-                                        <label for="star2pelayanan" title="text">2 stars</label>
-                                        <input type="radio" id="star1pelayanan" name="pelayanan" value="1" />
-                                        <label for="star1pelayanan" title="text">1 star</label>
+                                        <input type="radio" id="star5pelayanan{{ $order->id }}" name="pelayanan" value="5" />
+                                        <label for="star5pelayanan{{ $order->id }}" title="text">5 stars</label>
+                                        <input type="radio" id="star4pelayanan{{ $order->id }}" name="pelayanan" value="4" />
+                                        <label for="star4pelayanan{{ $order->id }}" title="text">4 stars</label>
+                                        <input type="radio" id="star3pelayanan{{ $order->id }}" name="pelayanan" value="3" />
+                                        <label for="star3pelayanan{{ $order->id }}" title="text">3 stars</label>
+                                        <input type="radio" id="star2pelayanan{{ $order->id }}" name="pelayanan" value="2" />
+                                        <label for="star2pelayanan{{ $order->id }}" title="text">2 stars</label>
+                                        <input type="radio" id="star1pelayanan{{ $order->id }}" name="pelayanan" value="1" />
+                                        <label for="star1pelayanan{{ $order->id }}" title="text">1 star</label>
                                     </div>
                                 </td>
                             </tr>
@@ -139,16 +139,16 @@
                                 <td>Harga:</td>
                                 <td>
                                     <div class="rate">
-                                        <input type="radio" id="star5harga" name="harga" value="5" />
-                                        <label for="star5harga" title="text">5 stars</label>
-                                        <input type="radio" id="star4harga" name="harga" value="4" />
-                                        <label for="star4harga" title="text">4 stars</label>
-                                        <input type="radio" id="star3harga" name="harga" value="3" />
-                                        <label for="star3harga" title="text">3 stars</label>
-                                        <input type="radio" id="star2harga" name="harga" value="2" />
-                                        <label for="star2harga" title="text">2 stars</label>
-                                        <input type="radio" id="star1harga" name="harga" value="1" />
-                                        <label for="star1harga" title="text">1 star</label>
+                                        <input type="radio" id="star5harga{{ $order->id }}" name="harga" value="5" />
+                                        <label for="star5harga{{ $order->id }}" title="text">5 stars</label>
+                                        <input type="radio" id="star4harga{{ $order->id }}" name="harga" value="4" />
+                                        <label for="star4harga{{ $order->id }}" title="text">4 stars</label>
+                                        <input type="radio" id="star3harga{{ $order->id }}" name="harga" value="3" />
+                                        <label for="star3harga{{ $order->id }}" title="text">3 stars</label>
+                                        <input type="radio" id="star2harga{{ $order->id }}" name="harga" value="2" />
+                                        <label for="star2harga{{ $order->id }}" title="text">2 stars</label>
+                                        <input type="radio" id="star1harga{{ $order->id }}" name="harga" value="1" />
+                                        <label for="star1harga{{ $order->id }}" title="text">1 star</label>
                                     </div>
                                 </td>
                             </tr>

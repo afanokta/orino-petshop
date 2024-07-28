@@ -761,6 +761,9 @@ label.disable {
         margin-top: 0 !important;
     }
 }
+.fc .fc-col-header-cell-cushion, .fc-daygrid-day-number{
+    text-decoration: none !important;
+}
 
 .fc-event-title {
     cursor: pointer !important;
@@ -805,4 +808,18 @@ label.disable {
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
+}
+
+.card-review {
+    height: 20rem;
+}
+
+@media (min-width: 992px) {
+    .h-lg-50 {
+        height: 50% !important;
+    }
+
+    .card-review{
+        height: 20rem !important;
+    }
 }

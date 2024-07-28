@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -173,5 +174,17 @@ class OrderController extends Controller
         }
 
         return redirect()->back()->with('success', 'Berhasil Menolak Pesanan');
+    }
+
+    public function order_by_user_page () {
+        $orders = Order::selectRaw('user_id, COUNT(*) as pesanan')->groupBy('user_id')->orderBy('pesanan', 'desc')->with('user')->paginate(5);
+        // dd($orders);
+        return view('dashboard.order-by-user.index', compact('orders'));
+    }
+
+    public function user_order (User $user) {
+        $orders = $user->orders()->with('service')->paginate(5);
+        // dd($orders);
+        return view('dashboard.order-by-user.show', compact('orders', 'user'));
     }
 }
