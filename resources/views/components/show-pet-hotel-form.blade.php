@@ -30,8 +30,8 @@
                 placeholder="Nama Hewan Peliharaan" class="form-control" required>
         </div>
         <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" value="1"
-                {{ $order->service->vaccine ? 'checked' : '' }} id="flexCheckIndeterminate" name="vaccine" disabled>
+            <input class="form-check-input" type="checkbox" value="1" {{ $order->service->vaccine ? 'checked' : '' }}
+                id="flexCheckIndeterminate" name="vaccine" disabled>
             <label class="form-check-label" for="flexCheckIndeterminate">
                 Ada Sertifikat?
             </label>
@@ -60,12 +60,16 @@
             <label>Catatan</label>
             <input type="text" name="pet_food" placeholder="Merk Makanan" class="form-control"
                 value="{{ $order->service->note }}" readonly />
-        </div> --}}
-
-        <div class="form-group mb-3">
-            <label>Harga</label>
-            <input readonly value="Rp.{{ $order->price }}" type="text" name="price"
-               placeholder="Price" class="form-control" required>
-        </div>
+    </div> --}}
+    <div class="form-group mb-3">
+        <label for="catatan">Catatan</label>
+        <textarea class="form-control" id="catatan" rows="3">{{ $order->service->note }}</textarea>
     </div>
+
+    <div class="form-group mb-3">
+        <label>Harga</label>
+        <input readonly value="Rp.{{ $order->price }}" type="text" name="price" placeholder="Price" class="form-control"
+            required>
+    </div>
+</div>
 </div>

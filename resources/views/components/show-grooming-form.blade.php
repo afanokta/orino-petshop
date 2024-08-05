@@ -32,16 +32,16 @@
 
         <div class="form-group mb-3 align-items-center">
             <label>Jenis Grooming</label>
-            <input readonly value="{{ $order->service->product->name }} - Rp.{{ $order->service->product->price }}" type="text" name="equipment"
-                placeholder="Perlengkapan" class="form-control" required>
+            <input readonly value="{{ $order->service->product->name }} - Rp.{{ $order->service->product->price }}"
+                type="text" name="equipment" placeholder="Perlengkapan" class="form-control" required>
         </div>
     </div>
     <div class="col">
 
         <div class="form-group mb-3">
             <label>Usia (Dalam Bulan)</label>
-            <input readonly value="{{ $order->service->pet_age }}" type="text" name="pet_age"
-                placeholder="Usia Kucing" class="form-control" required>
+            <input readonly value="{{ $order->service->pet_age }}" type="text" name="pet_age" placeholder="Usia Kucing"
+                class="form-control" required>
         </div>
 
         <div class="form-group mb-3">
@@ -58,14 +58,18 @@
 
         <div class="form-group mb-3">
             <label for="jadwalTanggal">Tanggal Pemesanan</label>
-            <input readonly value="{{ $order->service->schedule->date }}" type="date" id="jadwalTanggal" class="form-control"
-                name="date" required readonly>
+            <input readonly value="{{ $order->service->schedule->date }}" type="date" id="jadwalTanggal"
+                class="form-control" name="date" required readonly>
         </div>
 
         <div class="form-group mb-3">
             <label for="sesi-jadwal">Sesi Pemesanan</label>
-            <input readonly value="{{ $order->service->schedule->session->format('H:i') }}" type="time" class="form-control"
-                id="sesi-jadwal" name="session" required readonly>
+            <input readonly value="{{ $order->service->schedule->session->format('H:i') }}" type="time"
+                class="form-control" id="sesi-jadwal" name="session" required readonly>
+        </div>
+        <div class="form-group mb-3">
+            <label for="catatan">Catatan</label>
+            <textarea class="form-control" id="catatan" rows="3">{{ $order->service->note }}</textarea>
         </div>
     </div>
 
